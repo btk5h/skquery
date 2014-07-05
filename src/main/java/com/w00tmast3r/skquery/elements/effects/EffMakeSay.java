@@ -1,0 +1,38 @@
+package com.w00tmast3r.skquery.elements.effects;
+
+import ch.njol.skript.lang.Effect;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Patterns;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+
+
+@Patterns("make %players% say %string%")
+public class EffMakeSay extends Effect {
+
+    private Expression<Player> players;
+    private Expression<String> text;
+
+    @Override
+    protected void execute(Event event) {
+        String t = text.getSingle(event);
+        if (t == null) return;
+        for (Player p : players.getAll(event)) {
+            p.chat(t);
+        }
+    }
+
+    @Override
+    public String toString(Event event, boolean b) {
+        return "say wat";
+    }
+
+    @Override
+    public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
+        players = (Expression<Player>) expressions[0];
+        text = (Expression<String>) expressions[1];
+        return true;
+    }
+}

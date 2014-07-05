@@ -1,0 +1,46 @@
+package com.w00tmast3r.skquery.elements.lang;
+
+import ch.njol.skript.lang.Effect;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.TriggerItem;
+import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Patterns;
+import org.bukkit.event.Event;
+
+
+@Patterns("branch %number%")
+public class EffBranch extends Effect {
+
+    private Expression<Number> br;
+
+    @Override
+    protected void execute(Event event) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected TriggerItem walk(Event e) {
+        debug(e, false);
+        Number bv = br.getSingle(e);
+        if(bv == null) return null;
+        int b = bv.intValue();
+        for(int i = 0; i < b; i++){
+            TriggerItem.walk(getNext(), e);
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public String toString(Event event, boolean b) {
+        return "escape";
+    }
+
+    @Override
+    public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
+        br = (Expression<Number>) expressions[0];
+        return true;
+    }
+}

@@ -1,0 +1,39 @@
+package com.w00tmast3r.skquery.elements.effects;
+
+import ch.njol.skript.aliases.ItemType;
+import ch.njol.skript.lang.Effect;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Patterns;
+import org.bukkit.block.Block;
+import org.bukkit.event.Event;
+
+
+@Patterns("@noupdate::set %blocks% to %itemtype%")
+public class EffExtendsFuncSetBlock extends Effect {
+
+    private Expression<Block> blocks;
+    private Expression<ItemType> toSet;
+
+    @Override
+    protected void execute(Event event) {
+        ItemType t = toSet.getSingle(event);
+        if (t == null) return;
+        for (Block b : blocks.getAll(event)) {
+            t.getBlock().setBlock(b, false);
+        }
+    }
+
+    @Override
+    public String toString(Event event, boolean b) {
+        return "true";
+    }
+
+    @Override
+    public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
+        blocks = (Expression<Block>) expressions[0];
+        toSet = (Expression<ItemType>) expressions[1];
+        return true;
+    }
+}
