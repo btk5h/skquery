@@ -4,8 +4,8 @@ import ch.njol.skript.lang.Literal;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Checker;
-import com.w00tmast3r.skriptaddon.skriptplus.elements.lang.FunctionEvent;
-import com.w00tmast3r.skriptaddon.skriptplus.elements.lang.RoutineEvent;
+import com.w00tmast3r.skquery.elements.lang.FunctionEvent;
+import com.w00tmast3r.skquery.elements.lang.RoutineEvent;
 import org.bukkit.event.Event;
 
 @SuppressWarnings("unchecked")

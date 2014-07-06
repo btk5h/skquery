@@ -2,18 +2,17 @@ package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import com.w00tmast3r.skquery.api.PropertyPatterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
-import com.w00tmast3r.skriptaddon.skriptplus.util.comphenix.InventorySerialUtils;
+import com.w00tmast3r.skquery.api.PropertyFrom;
+import com.w00tmast3r.skquery.api.PropertyTo;
+import com.w00tmast3r.skquery.api.UsePropertyPatterns;
+import com.w00tmast3r.skquery.util.Collect;
+import com.w00tmast3r.skquery.util.serialization.InventorySerialUtils;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 
-
-@PropertyPatterns(
-        fromType = "inventory",
-        property = "serialized contents"
-
-)
+@UsePropertyPatterns
+@PropertyFrom("inventory")
+@PropertyTo("serialized contents")
 public class ExprInventorySerials extends SimplePropertyExpression<Inventory, String> {
     @Override
     protected String getPropertyName() {

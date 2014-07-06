@@ -6,7 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Reflection;
+import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Location;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.Event;

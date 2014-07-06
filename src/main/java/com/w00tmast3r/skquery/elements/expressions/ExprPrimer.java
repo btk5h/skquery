@@ -1,15 +1,15 @@
 package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import com.w00tmast3r.skquery.api.PropertyPatterns;
+import com.w00tmast3r.skquery.api.PropertyFrom;
+import com.w00tmast3r.skquery.api.PropertyTo;
+import com.w00tmast3r.skquery.api.UsePropertyPatterns;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.TNTPrimed;
 
-
-@PropertyPatterns(
-        fromType = "entities",
-        property = "(primer|fuse lighting piece of shit)"
-)
+@UsePropertyPatterns
+@PropertyFrom("entities")
+@PropertyTo("(primer|fuse lighting piece of shit)")
 public class ExprPrimer extends SimplePropertyExpression<Entity, Entity> {
 
     @Override

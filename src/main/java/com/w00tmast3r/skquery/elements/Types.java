@@ -7,8 +7,8 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
 import com.w00tmast3r.skquery.api.AbstractTask;
-import com.w00tmast3r.skriptaddon.skaddonlib.messaging.JSONMessage;
-import com.w00tmast3r.skriptaddon.skriptplus.util.ImageUtils;
+import com.w00tmast3r.skquery.util.ImageUtils;
+import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
 import org.bukkit.FireworkEffect;
 
 import java.awt.image.BufferedImage;

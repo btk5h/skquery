@@ -2,7 +2,7 @@ package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.elements.conditions.CondIsPrime;
+import com.w00tmast3r.skquery.elements.conditions.CondIsPrime;
 
 
 @Patterns("%number%(st|nd|rd|th) prime")

@@ -2,18 +2,18 @@ package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import com.w00tmast3r.skquery.api.PropertyPatterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
+import com.w00tmast3r.skquery.api.PropertyFrom;
+import com.w00tmast3r.skquery.api.PropertyTo;
+import com.w00tmast3r.skquery.api.UsePropertyPatterns;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 
-
-@PropertyPatterns(
-        fromType = "entities",
-        property = "land boat (state|ability|mode)"
-)
-public class ExprOMGLandBoats extends SimplePropertyExpression<Entity, Boolean> {
+@UsePropertyPatterns
+@PropertyFrom("entities")
+@PropertyTo("land boat (state|mode|ability)")
+public class ExprLandBoats extends SimplePropertyExpression<Entity, Boolean> {
     @Override
     protected String getPropertyName() {
         return "blast size";

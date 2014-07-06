@@ -5,14 +5,13 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-
 
 @Patterns("[the] [buffered[ ]]image from [url] %string%")
 public class ExprImageURL extends SimpleExpression<BufferedImage> {

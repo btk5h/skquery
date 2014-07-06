@@ -4,10 +4,9 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.api.ManualDoc;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.maps.RenderTask;
-import com.w00tmast3r.skriptaddon.skriptplus.util.maps.SkriptMapRenderer;
+import com.w00tmast3r.skquery.util.maps.RenderTask;
+import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -21,10 +20,6 @@ import java.awt.image.PixelGrabber;
 
 @Patterns({"draw [buffered[ ]]image %image% on [map] %number%",
         "draw [buffered[ ]]image %image% on [map] %number% [starting] from %number%, %number%"})
-@ManualDoc(
-        name = "Draw Image On Map",
-        description = "Draws an image onto a map. If coordinates are not specified, the image will be drawn from the top left corner of the map canvas. Maps must first be managed by the Manage Map effect."
-)
 public class EffDrawImage extends Effect {
 
     private Expression<BufferedImage> image;

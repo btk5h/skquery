@@ -1,12 +1,12 @@
-package com.w00tmast3r.skquery.elements.expressions.json;
+package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.messaging.JSONMessage;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
+import com.w00tmast3r.skquery.util.Collect;
+import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
 import org.bukkit.event.Event;
 
 

@@ -6,9 +6,8 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.api.ManualDoc;
+import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.SkriptPlus;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,12 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Deprecated
 @Patterns("show %string% with %number% row[s] named %string% to %player%")
-@ManualDoc(
-        name = "Display Item Menu v1",
-        description = "This is a deprecated effect. Avoid using this effect, use Display Item Menu v2 instead."
-)
 public class EffVirtualChestSynthesizer extends Effect implements Listener {
 
     private Expression<String> virtualInventorySerial, virtualInventoryName;
@@ -46,7 +41,7 @@ public class EffVirtualChestSynthesizer extends Effect implements Listener {
         final String[] invStr = vIS.split(";");
         final Inventory inv = Bukkit.createInventory(null, r, vIN);
         t.openInventory(inv);
-        Bukkit.getScheduler().runTaskLater(SkriptPlus.me.getPlugin(), new Runnable() {
+        Bukkit.getScheduler().runTaskLater(SkQuery.getInstance(), new Runnable() {
             public void run() {
                 boolean isCurrentlyFlagging = true;
                 String currentOperation = "";
@@ -100,7 +95,7 @@ public class EffVirtualChestSynthesizer extends Effect implements Listener {
                     }
                 }
                 t.updateInventory();
-                Bukkit.getPluginManager().registerEvents(new VirtualChestManager(vIN, t.getName(), commands), SkriptPlus.me.getPlugin());
+                Bukkit.getPluginManager().registerEvents(new VirtualChestManager(vIN, t.getName(), commands), SkQuery.getInstance());
             }
         }, 1);
     }

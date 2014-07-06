@@ -4,31 +4,34 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.api.ManualDoc;
 import com.w00tmast3r.skquery.api.Patterns;
-import org.bukkit.Bukkit;
+import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 
-@Patterns("touch my server in places my server has never been touched before")
-@ManualDoc(
-      name = "Touch My Server In Places That Should Never Be Touched",
-      description = "Your server will die of fatigue after this ;)"
-)
-public class EffTouchMyServerInPlacesThatShouldNeverBeTouched extends Effect {
+@Patterns("(send|message) %jsonmessage% to %players%")
+public class EffSendJson extends Effect {
+
+    private Expression<JSONMessage> json;
+    private Expression<Player> players;
 
     @Override
     protected void execute(Event event) {
-        Bukkit.shutdown();
+        JSONMessage j = json.getSingle(event);
+        if (j == null) return;
+        j.send(players.getAll(event));
     }
 
     @Override
     public String toString(Event event, boolean b) {
-        return "yes! yes! yes!";
+        return "json";
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
+        json = (Expression<JSONMessage>) expressions[0];
+        players = (Expression<Player>) expressions[1];
         return true;
     }
 }

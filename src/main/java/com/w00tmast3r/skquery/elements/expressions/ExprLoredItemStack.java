@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-
 @Patterns("%itemtypes% with lore %string%")
 public class ExprLoredItemStack extends PropertyExpression<ItemType, ItemType> {
 

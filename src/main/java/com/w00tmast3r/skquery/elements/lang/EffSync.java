@@ -13,8 +13,8 @@ import ch.njol.skript.log.ParseLogHandler;
 import ch.njol.skript.log.SkriptLogger;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.SkriptPlus;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -47,7 +47,7 @@ public class EffSync extends Effect implements Listener {
     protected TriggerItem walk(Event e) {
         String c = cause.getSingle(e);
         if(c == null) return null;
-        Bukkit.getPluginManager().registerEvents(this, SkriptPlus.me.getPlugin());
+        Bukkit.getPluginManager().registerEvents(this, SkQuery.getInstance());
         Bukkit.getPluginManager().callEvent(new FunctionEvent(c, (args == null ? null : args.getAll(e)), this));
         storedEvent = e;
         next = getNext();

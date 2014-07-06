@@ -5,12 +5,11 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-
 
 @Patterns({"inventory of %inventorytype%", "chest with %number% row[s]", "chest with %number% row[s] named %string%"})
 public class ExprBlankInventories extends SimpleExpression<Inventory> {

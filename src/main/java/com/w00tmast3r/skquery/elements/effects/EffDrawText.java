@@ -4,10 +4,9 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.api.ManualDoc;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.maps.RenderTask;
-import com.w00tmast3r.skriptaddon.skriptplus.util.maps.SkriptMapRenderer;
+import com.w00tmast3r.skquery.util.maps.RenderTask;
+import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,10 +17,6 @@ import org.bukkit.map.MinecraftFont;
 
 @Patterns({"draw %string% on [map] %number%",
         "draw %string% on [map] %number% [starting] from %number%, %number%"})
-@ManualDoc(
-        name = "Draw Text On Map",
-        description = "Draw text onto a map. If coordinates are not specified, the text will be drawn from the top left corner of the map canvas. Colors and new lines are not currently supported. Maps must be first initialized by the Manage Map effect."
-)
 public class EffDrawText extends Effect {
 
     private Expression<String> text;

@@ -5,7 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.Particle;
+import com.w00tmast3r.skquery.util.packet.Particle;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 

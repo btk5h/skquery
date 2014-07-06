@@ -1,8 +1,8 @@
-package com.w00tmast3r.skquery.elements.expressions.json;
+package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.messaging.JSONMessage;
+import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
 
 
 @Patterns("json [of] %string%")

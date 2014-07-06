@@ -4,7 +4,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.api.ManualDoc;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -19,10 +18,6 @@ import org.bukkit.inventory.ItemStack;
         "format slot %number% of %players% with %itemstack% to (be|act) unstealable",
         "unformat slot %number% of %players%"
 })
-@ManualDoc(
-        name = "Format Item Menu V2",
-        description = "Format a single slot to act as an virtual menu. This only applies when the player has an open inventory."
-)
 public class EffAddFormatSlot extends Effect {
 
     private Expression<Number> slot;

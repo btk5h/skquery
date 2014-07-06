@@ -6,7 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.lib.legacy.ItemProjectile;
+import com.w00tmast3r.skquery.util.custom.projectile.ItemProjectile;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 
@@ -24,27 +24,7 @@ public class EffShootItemProjectile extends Effect {
         LivingEntity s = shooter.getSingle(event);
         Number n;
         if(p == null || s == null) return;
-        if(velocity == null) n = new Number() {
-            @Override
-            public int intValue() {
-                return 1;
-            }
-
-            @Override
-            public long longValue() {
-                return 1;
-            }
-
-            @Override
-            public float floatValue() {
-                return 1;
-            }
-
-            @Override
-            public double doubleValue() {
-                return 1;
-            }
-        };
+        if(velocity == null) n = 1;
         else n = velocity.getSingle(event);
         float v = n.floatValue();
         new ItemProjectile(p.getRandom()).shoot(s, s.getLocation().getDirection().multiply(v));

@@ -1,6 +1,6 @@
 package com.w00tmast3r.skquery.elements.virtualchests;
 
-import com.w00tmast3r.skriptaddon.skriptplus.SkriptPlus;
+import com.w00tmast3r.skquery.SkQuery;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -49,7 +49,7 @@ public class VirtualChestManager implements Listener {
     }
 
     private void safeClose(final Player p){
-        Bukkit.getScheduler().runTaskLater(SkriptPlus.me.getPlugin(), new Runnable() {
+        Bukkit.getScheduler().runTaskLater(SkQuery.getInstance(), new Runnable() {
             @Override
             public void run() {
                 p.getOpenInventory().close();

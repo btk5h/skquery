@@ -1,6 +1,6 @@
 package com.w00tmast3r.skquery.elements.virtualchests.v2;
 
-import com.w00tmast3r.skriptaddon.skriptplus.SkriptPlus;
+import com.w00tmast3r.skquery.SkQuery;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -60,7 +60,7 @@ public class FormattedSlotManager implements Listener {
             SlotRule rule = playerRules.get(p.getUniqueId()).get(event.getSlot());
             rule.run();
             if (rule.willClose()) {
-                Bukkit.getScheduler().runTaskLater(SkriptPlus.me.getPlugin(), new Runnable() {
+                Bukkit.getScheduler().runTaskLater(SkQuery.getInstance(), new Runnable() {
                     @Override
                     public void run() {
                         p.getOpenInventory().close();
@@ -76,7 +76,7 @@ public class FormattedSlotManager implements Listener {
             exempt.remove(event.getPlayer().getUniqueId());
             return;
         }
-        Bukkit.getScheduler().runTaskLater(SkriptPlus.me.getPlugin(), new Runnable() {
+        Bukkit.getScheduler().runTaskLater(SkQuery.getInstance(), new Runnable() {
             @Override
             public void run() {
                 if (playerRules.get(event.getPlayer().getUniqueId()) != null) playerRules.get(event.getPlayer().getUniqueId()).clear();

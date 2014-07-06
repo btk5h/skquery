@@ -7,7 +7,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.iterator.EmptyIterator;
 import ch.njol.util.coll.iterator.IteratorIterable;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.CuboidIterator;
+import com.w00tmast3r.skquery.util.custom.region.CuboidIterator;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
@@ -15,7 +15,6 @@ import org.bukkit.event.Event;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 
 @Patterns("blocks within %location% to %location%")
 public class ExprBlockCube extends SimpleExpression<Block> {

@@ -6,7 +6,7 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Collect;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.FireworkEffect;
 import org.bukkit.event.Event;
 

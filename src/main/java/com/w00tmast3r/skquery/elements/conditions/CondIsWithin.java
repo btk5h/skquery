@@ -5,7 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.util.CuboidRegion;
+import com.w00tmast3r.skquery.util.custom.region.CuboidRegion;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 

@@ -7,10 +7,10 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skriptaddon.skriptplus.SkriptPlus;
-import com.w00tmast3r.skriptaddon.skriptplus.util.Particle;
-import com.w00tmast3r.skriptaddon.skriptplus.util.TaskBukkit;
+import com.w00tmast3r.skquery.util.CancellableBukkitTask;
+import com.w00tmast3r.skquery.util.packet.Particle;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -26,7 +26,7 @@ public class EffTrail extends Effect {
         final Particle p = particle.getSingle(event);
         if(p == null) return;
         final ProjectileLaunchEvent e = (ProjectileLaunchEvent) event;
-        TaskBukkit task = new TaskBukkit() {
+        CancellableBukkitTask task = new CancellableBukkitTask() {
             @Override
             public void run() {
                 Particle.play(p.getId(), e.getEntity().getLocation(), 1, 0, 0, 0, 0);
@@ -35,7 +35,7 @@ public class EffTrail extends Effect {
                 }
             }
         };
-        task.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SkriptPlus.me.getPlugin(), task, 0, 1));
+        task.setTaskId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SkQuery.getInstance(), task, 0, 1));
     }
 
     @Override
