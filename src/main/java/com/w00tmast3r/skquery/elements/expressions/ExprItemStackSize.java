@@ -2,16 +2,16 @@ package com.w00tmast3r.skquery.elements.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
-import com.w00tmast3r.skquery.api.PropertyPatterns;
+import com.w00tmast3r.skquery.api.PropertyFrom;
+import com.w00tmast3r.skquery.api.PropertyTo;
+import com.w00tmast3r.skquery.api.UsePropertyPatterns;
 import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 
-
-@PropertyPatterns(
-        fromType = "inventorys",
-        property = "global max stack size"
-)
+@UsePropertyPatterns
+@PropertyFrom("inventories")
+@PropertyTo("global max stack size")
 public class ExprItemStackSize extends SimplePropertyExpression<Inventory, Number> {
 
     @Override
