@@ -9,11 +9,10 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.lang.util.SimpleLiteral;
 import com.w00tmast3r.skquery.api.AbstractTask;
 import com.w00tmast3r.skquery.util.IterableEnumeration;
+import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.PluginDescriptionFile;
-import sun.reflect.CallerSensitive;
-import sun.reflect.Reflection;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +29,8 @@ public class Registration {
      * register your classes. This method MUST be called from within your
      * plugin, for safety reasons.
      */
-    @CallerSensitive
     public static void enableSnooper() {
-        final Class caller = Reflection.getCallerClass();
+        final Class caller = Reflection.getCaller();
         final URL callerLocation = caller.getProtectionDomain().getCodeSource().getLocation();
         Bukkit.getLogger().info("[skQuery] Snooping enabled from " + caller.getCanonicalName());
         try {

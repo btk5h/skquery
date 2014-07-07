@@ -103,4 +103,12 @@ public class Reflection {
     public static String getServerVersion() {
         return Bukkit.getServer().getClass().getPackage().getName().replace(".", "@").split("@")[3];
     }
+
+    public static Class getCaller() {
+        try {
+            return Class.forName(Thread.currentThread().getStackTrace()[3].getClassName(), false, Reflection.class.getClassLoader());
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
 }
