@@ -14,8 +14,9 @@
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>local-repo</id>
-            <url>file:${project.basedir}/repo/</url>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
         </repository>
     </repositories>
     <dependencies>
