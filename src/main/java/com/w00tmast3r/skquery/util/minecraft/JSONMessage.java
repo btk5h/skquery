@@ -1,6 +1,6 @@
 package com.w00tmast3r.skquery.util.minecraft;
 
-import com.w00tmast3r.skriptaddon.skaddonlib.util.Reflection;
+import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Achievement;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;

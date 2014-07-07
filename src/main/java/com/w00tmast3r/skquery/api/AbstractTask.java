@@ -1,13 +1,9 @@
 package com.w00tmast3r.skquery.api;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.util.SimpleEvent;
-import com.w00tmast3r.skriptaddon.skaddonlib.development.registration.RegistrationManager;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.lang.annotation.Annotation;
 
 /**
  * A runnable with a set of tools that help for registering events.
@@ -29,6 +25,7 @@ public abstract class AbstractTask implements Runnable {
 
     @Deprecated
     protected void registerEvent(JavaPlugin owner, String codeName, String name, Class<? extends SkriptEvent> handler, Class<? extends Event> event, final String... patterns) {
+        /*
         if(RegistrationManager.codenames.contains(codeName)) return;
         RegistrationManager.codenames.add(codeName);
         Skript.registerEvent(name, handler, event, patterns);
@@ -43,5 +40,6 @@ public abstract class AbstractTask implements Runnable {
                 return Patterns.class;
             }
         }, null));
+        */
     }
 }
