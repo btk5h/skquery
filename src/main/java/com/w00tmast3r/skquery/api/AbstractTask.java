@@ -1,5 +1,6 @@
 package com.w00tmast3r.skquery.api;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.util.SimpleEvent;
 import org.bukkit.event.Event;
@@ -41,5 +42,6 @@ public abstract class AbstractTask implements Runnable {
             }
         }, null));
         */
+        Skript.registerEvent(name, handler, event, patterns);
     }
 }

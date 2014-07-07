@@ -1,13 +1,15 @@
 package com.w00tmast3r.skquery;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.lang.util.SimpleLiteral;
-import com.w00tmast3r.skquery.api.AbstractTask;
+import com.w00tmast3r.skquery.api.*;
 import com.w00tmast3r.skquery.util.IterableEnumeration;
 import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Bukkit;
@@ -16,6 +18,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class Registration {
                                     || PropertyExpression.class.isAssignableFrom(c)
                                     || SimplePropertyExpression.class.isAssignableFrom(c)
                                     || SimpleLiteral.class.isAssignableFrom(c)
-                                    || AbstractTask.class.isAssignableFrom(c)) {
+                                    || (AbstractTask.class.isAssignableFrom(c) && c != AbstractTask.class)) {
                                 classes.add(c);
                             }
                         } catch (ClassNotFoundException error) {
@@ -67,7 +70,7 @@ public class Registration {
                     }
                 }
                 Bukkit.getLogger().info("[skQuery] Finished snooping of " + desc.getName() + " with " + classes.size() + " classes.");
-
+                register(desc, classes.toArray(new Class[classes.size()]));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -75,4 +78,81 @@ public class Registration {
             e.printStackTrace();
         }
     }
+
+    private static void register(PluginDescriptionFile info, Class[] classes) {
+        int success = 0;
+        Bukkit.getLogger().info("[skQuery] Beginning to process a total of " + classes.length + " from " + info.getName());
+        main: for (final Class c : classes) {
+            Annotation[] annotations = c.getAnnotations();
+            Patterns patterns = null;
+            for (Annotation a : annotations) {
+                if (a instanceof Dependency) {
+                    for (String s : ((Dependency) a).value()) {
+                        if (Bukkit.getPluginManager().getPlugin(s) == null) {
+                            continue main;
+                        }
+                    }
+                }
+            }
+            if (Effect.class.isAssignableFrom(c)) {
+                if (c.isAnnotationPresent(Patterns.class)) {
+                    Skript.registerEffect(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                    success++;
+                } else {
+                    Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
+                }
+            } else if (Condition.class.isAssignableFrom(c)) {
+                if (c.isAnnotationPresent(Patterns.class)) {
+                    Skript.registerCondition(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                    success++;
+                } else {
+                    Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
+                }
+            } else if ((Expression.class.isAssignableFrom(c))
+                    || (SimpleExpression.class.isAssignableFrom(c))
+                    || (PropertyExpression.class.isAssignableFrom(c))
+                    || (SimplePropertyExpression.class.isAssignableFrom(c))) {
+                if (c.isAnnotationPresent(Patterns.class)) {
+                    try {
+                        Expression ex = (Expression) c.newInstance();
+                        Skript.registerExpression(c, ex.getReturnType(), ExpressionType.PROPERTY, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                        success++;
+                    } catch (InstantiationException e) {
+                        Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " could not be instantiated by skQuery!");
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                } else if (c.isAnnotationPresent(UsePropertyPatterns.class) && c.isAnnotationPresent(PropertyFrom.class) && c.isAnnotationPresent(PropertyTo.class) ) {
+                    try {
+                        Expression ex = (Expression) c.newInstance();
+                        Skript.registerExpression(c, ex.getReturnType(), ExpressionType.PROPERTY,
+                                "[the] " + ((PropertyTo) c.getAnnotation(PropertyTo.class)).value() + " of %" + ((PropertyFrom) c.getAnnotation(PropertyFrom.class)).value() + "%",
+                                "%" + ((PropertyFrom) c.getAnnotation(PropertyFrom.class)).value() + "%'[s] " + ((PropertyTo) c.getAnnotation(PropertyTo.class)).value());
+                        success++;
+                    } catch (InstantiationException e) {
+                        Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " could not be instantiated by skQuery!");
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
+                }
+            } else if (AbstractTask.class.isAssignableFrom(c)) {
+                try {
+                    AbstractTask task = (AbstractTask) c.newInstance();
+                    task.run();
+                    success++;
+                } catch (InstantiationException e) {
+                    Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " could not be instantiated by skQuery!");
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            } else assert false;
+        }
+        Bukkit.getLogger().info("[skQuery] Out of " + classes.length + " classes, " + success + " classes were loaded from " + info.getName());
+    }
+
 }
