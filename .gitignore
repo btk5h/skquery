@@ -15,8 +15,9 @@ hs_err_pid*
 *.name
 *.xml
 *.iml
+target/*
 
-# Local Repo Exceptions
+# Local Exceptions
 !Skript-2.1.2.jar
 !maven-metadata.xml
 !pom.xml
