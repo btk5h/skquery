@@ -16,6 +16,7 @@ public final class SkQuery extends JavaPlugin {
     @Override
     public void onEnable() {
         addonInstance = Skript.registerAddon(this);
+        Registration.enableSnooper();
     }
 
     public static SkQuery getInstance() {
