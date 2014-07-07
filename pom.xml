@@ -29,8 +29,6 @@
         <dependency>
             <groupId>ch.njol</groupId>
             <artifactId>skript</artifactId>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/repo/ch/njol/skript/2.1.2/skript-2.1.2.jar</systemPath>
             <version>2.1.2</version>
         </dependency>
     </dependencies>
