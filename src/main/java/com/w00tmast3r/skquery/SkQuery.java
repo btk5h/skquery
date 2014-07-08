@@ -2,6 +2,8 @@ package com.w00tmast3r.skquery;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import com.w00tmast3r.skquery.elements.virtualchests.v2.FormattedSlotManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SkQuery extends JavaPlugin {
@@ -17,6 +19,7 @@ public final class SkQuery extends JavaPlugin {
     public void onEnable() {
         addonInstance = Skript.registerAddon(this);
         Registration.enableSnooper();
+        Bukkit.getPluginManager().registerEvents(new FormattedSlotManager(), this);
     }
 
     public static SkQuery getInstance() {
