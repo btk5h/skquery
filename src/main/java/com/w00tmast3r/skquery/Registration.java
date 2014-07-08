@@ -10,6 +10,8 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.lang.util.SimpleLiteral;
 import com.w00tmast3r.skquery.api.*;
+import com.w00tmast3r.skquery.elements.effects.base.OptionsPragma;
+import com.w00tmast3r.skquery.elements.effects.base.Pragma;
 import com.w00tmast3r.skquery.util.IterableEnumeration;
 import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Bukkit;
@@ -53,6 +55,7 @@ public class Registration {
                         String className = e.getName().replace('/', '.').substring(0, e.getName().length() - 6);
                         try {
                             Class c = Class.forName(className, false, caller.getClassLoader());
+                            if (c == Pragma.class || c == OptionsPragma.class || c == AbstractTask.class) continue;
                             if (Effect.class.isAssignableFrom(c)
                                     || Condition.class.isAssignableFrom(c)
                                     || Expression.class.isAssignableFrom(c)
@@ -60,7 +63,7 @@ public class Registration {
                                     || PropertyExpression.class.isAssignableFrom(c)
                                     || SimplePropertyExpression.class.isAssignableFrom(c)
                                     || SimpleLiteral.class.isAssignableFrom(c)
-                                    || (AbstractTask.class.isAssignableFrom(c) && c != AbstractTask.class)) {
+                                    || AbstractTask.class.isAssignableFrom(c)) {
                                 classes.add(c);
                             }
                         } catch (ClassNotFoundException error) {
@@ -94,7 +97,7 @@ public class Registration {
                     }
                 }
             }
-            if (Effect.class.isAssignableFrom(c)) {
+            if (Effect.class.isAssignableFrom(c) || Pragma.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {
                     Skript.registerEffect(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
                     success++;

@@ -3,6 +3,7 @@ package com.w00tmast3r.skquery.elements.events;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.w00tmast3r.skquery.api.AbstractTask;
+import com.w00tmast3r.skquery.elements.events.bukkit.ScriptOptionsEvent;
 import com.w00tmast3r.skquery.elements.lang.FunctionEvent;
 import com.w00tmast3r.skquery.elements.lang.RoutineEvent;
 import com.w00tmast3r.skquery.util.custom.projectile.ItemProjectileHitEvent;
@@ -146,5 +147,7 @@ public class EventRegistry extends AbstractTask {
                 return vehicleEntityCollisionEvent.getEntity();
             }
         }, 0);
+
+        registerEvent("evtScriptOptions", "Script Options Header", ScriptOptionsEvent.class, "script options");
     }
 }
