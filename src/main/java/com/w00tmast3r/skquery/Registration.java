@@ -1,14 +1,10 @@
 package com.w00tmast3r.skquery;
 
 import ch.njol.skript.Skript;
-import ch.njol.skript.expressions.base.PropertyExpression;
-import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
-import ch.njol.skript.lang.util.SimpleExpression;
-import ch.njol.skript.lang.util.SimpleLiteral;
 import com.w00tmast3r.skquery.api.*;
 import com.w00tmast3r.skquery.elements.effects.base.OptionsPragma;
 import com.w00tmast3r.skquery.elements.effects.base.Pragma;
@@ -59,10 +55,6 @@ public class Registration {
                             if (Effect.class.isAssignableFrom(c)
                                     || Condition.class.isAssignableFrom(c)
                                     || Expression.class.isAssignableFrom(c)
-                                    || SimpleExpression.class.isAssignableFrom(c)
-                                    || PropertyExpression.class.isAssignableFrom(c)
-                                    || SimplePropertyExpression.class.isAssignableFrom(c)
-                                    || SimpleLiteral.class.isAssignableFrom(c)
                                     || AbstractTask.class.isAssignableFrom(c)) {
                                 classes.add(c);
                             }
@@ -97,7 +89,7 @@ public class Registration {
                     }
                 }
             }
-            if (Effect.class.isAssignableFrom(c) || Pragma.class.isAssignableFrom(c)) {
+            if (Effect.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {
                     Skript.registerEffect(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
                     success++;
@@ -111,10 +103,7 @@ public class Registration {
                 } else {
                     Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
                 }
-            } else if ((Expression.class.isAssignableFrom(c))
-                    || (SimpleExpression.class.isAssignableFrom(c))
-                    || (PropertyExpression.class.isAssignableFrom(c))
-                    || (SimplePropertyExpression.class.isAssignableFrom(c))) {
+            } else if (Expression.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {
                     try {
                         Expression ex = (Expression) c.newInstance();
