@@ -21,3 +21,4 @@ target/*
 !Skript-2.1.2.jar
 !maven-metadata.xml
 !pom.xml
+src/main/resources/META-INF/MANIFEST.MF
