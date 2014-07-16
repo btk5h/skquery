@@ -14,9 +14,12 @@
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
+            <id>njol-repo</id>
+            <url>http://maven.njol.ch/repo/</url>
+        </repository>
+        <repository>
             <id>comphenix-repo</id>
-            <name>Comphenix Repository</name>
-            <url>http://repo.comphenix.net/content/groups/public</url>
+            <url>http://repo.comphenix.net/content/groups/public/</url>
         </repository>
     </repositories>
     <dependencies>
@@ -27,8 +30,15 @@
             <version>1.7.9-R0.2</version>
         </dependency>
         <dependency>
+            <groupId>ch.njol</groupId>
+            <artifactId>skript</artifactId>
+            <scope>provided</scope>
+            <version>2.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
+            <scope>provided</scope>
             <version>3.4.0</version>
         </dependency>
     </dependencies>
