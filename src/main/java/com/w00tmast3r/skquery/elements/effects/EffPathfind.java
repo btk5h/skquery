@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Location;
@@ -13,7 +15,8 @@ import org.bukkit.event.Event;
 
 import java.lang.reflect.InvocationTargetException;
 
-
+@Name("Pathfind")
+@Description("Invoke the entity pathfinder. Allows entities to pathfind to a location unless they are distracted. Not all entities have pathfinders.")
 @Patterns("make %livingentities% pathfind to %location% with speed %number%")
 public class EffPathfind extends Effect {
 

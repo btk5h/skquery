@@ -4,11 +4,14 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-
+@Name("Make Say")
+@Description("Force players to say text in chat. If you add a leading slash in the text, it will execute a command.")
 @Patterns("make %players% say %string%")
 public class EffMakeSay extends Effect {
 

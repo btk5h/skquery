@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.RenderTask;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
@@ -14,7 +16,8 @@ import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapView;
 import org.bukkit.map.MinecraftFont;
 
-
+@Name("Draw Text on Map")
+@Description("Draws text on a map that has been run through ((EffManageMap)Manage Map). Omitting the position draws the text at 0, 0.")
 @Patterns({"draw %string% on [map] %number%",
         "draw %string% on [map] %number% [starting] from %number%, %number%"})
 public class EffDrawText extends Effect {

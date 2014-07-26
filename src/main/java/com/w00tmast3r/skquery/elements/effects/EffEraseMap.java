@@ -4,14 +4,17 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.map.MapView;
 
-
-@Patterns("erase [map] %number%")
+@Name("Erase Map")
+@Description("Completely removes all tasks run on a map. Overwrites ((EffDrawImage)Draw Image)), ((EffDrawText)Draw Text)), and ((EffDrawCursor)Draw Cursor)).")
+@Patterns("(erase|wipe) [map] %number%")
 public class EffEraseMap extends Effect {
 
     private Expression<Number> id;

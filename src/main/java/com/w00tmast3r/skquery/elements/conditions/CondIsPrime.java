@@ -5,10 +5,13 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Checker;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.event.Event;
 
-
+@Name("Is Prime")
+@Description("Checks whether or not a number is prime.")
 @Patterns({"%number% is prime",
         "%number% is not prime"})
 public class CondIsPrime extends Condition {

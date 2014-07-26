@@ -8,8 +8,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
-import ch.njol.util.coll.CollectionUtils;
 import com.w00tmast3r.skquery.api.Patterns;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.server.ServerListPingEvent;
@@ -48,12 +48,13 @@ public class ExprMOTD extends SimpleExpression<String> {
 
     @Override
     public void change(Event e, Object[] delta, Changer.ChangeMode mode) {
-        ((ServerListPingEvent) e).setMotd((String) delta[0]);
+        String s = delta[0] == null ? "" : (String) delta[0];
+        ((ServerListPingEvent) e).setMotd(s);
     }
 
     @Override
     public Class<?>[] acceptChange(Changer.ChangeMode mode) {
-        if(mode == Changer.ChangeMode.SET) return CollectionUtils.array(String.class);
+        if(mode == Changer.ChangeMode.SET) return Collect.asArray(String.class);
         return null;
     }
 }

@@ -5,11 +5,15 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 
-
+@Name("Set Block Without Updates")
+@Description("Set blocks to another block without causing surrounding blocks to update.")
+@Deprecated
 @Patterns("@noupdate::set %blocks% to %itemtype%")
 public class EffExtendsFuncSetBlock extends Effect {
 

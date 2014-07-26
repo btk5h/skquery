@@ -4,13 +4,16 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.map.MapView;
 
-
+@Name("Manage Map")
+@Description("Allows maps to be controlled by skQuery. Using 'manage' will share the renderer with other custom map renderers. 'Override' deletes existing renderers.")
 @Patterns({"(manage|share) map [id] %number%",
         "(override|overwrite) map [id] %number%"})
 public class EffManageMap extends Effect {

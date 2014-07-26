@@ -4,12 +4,15 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 
-
+@Name("Make Damage")
+@Description("Cause entities to damage each other. If you cause hostile mobs to attack or be attacked, they will become aggroed on the last entity that they hit or got hit by.")
 @Patterns("make %livingentities% damage %livingentities% by %number%")
 public class EffMakeDamage extends Effect {
 

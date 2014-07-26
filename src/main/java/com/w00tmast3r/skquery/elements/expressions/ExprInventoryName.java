@@ -5,7 +5,7 @@ import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.w00tmast3r.skquery.api.PropertyFrom;
 import com.w00tmast3r.skquery.api.PropertyTo;
 import com.w00tmast3r.skquery.api.UsePropertyPatterns;
-import com.w00tmast3r.skquery.elements.virtualchests.v2.FormattedSlotManager;
+import com.w00tmast3r.skquery.util.custom.menus.v2_.FormattedSlotManager;
 import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;

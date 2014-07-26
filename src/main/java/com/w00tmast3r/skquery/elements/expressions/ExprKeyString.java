@@ -1,0 +1,73 @@
+package com.w00tmast3r.skquery.elements.expressions;
+
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.util.SimpleExpression;
+import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Patterns;
+import com.w00tmast3r.skquery.skript.Markup;
+import com.w00tmast3r.skquery.util.Collect;
+import org.bukkit.event.Event;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+@Patterns("random %number% (char|long|length) string from [charset] %markup%")
+public class ExprKeyString extends SimpleExpression<String> {
+
+    private Expression<Number> length;
+    private Expression<Markup> charset;
+
+    @Override
+    protected String[] get(Event event) {
+        Number l = length.getSingle(event);
+        Markup mk = charset.getSingle(event);
+        if (l == null || mk == null) return null;
+        int amt = l.intValue();
+        String chars = mk.toString();
+
+        ArrayList<ArrayList<Integer>> charranges = new ArrayList<ArrayList<Integer>>();
+        Pattern regex = Pattern.compile("(.)-(.)");
+        Matcher m = regex.matcher(chars);
+        while (m.find()) {
+            ArrayList<Integer> range = new ArrayList<Integer>();
+            int first = m.group(1).charAt(0);
+            int second = m.group(2).charAt(0);
+            range.add(Math.min(first, second));
+            range.add(Math.max(first, second));
+            charranges.add(range);
+        }
+        Random rng = new Random();
+        String out = "";
+        while (0 < amt--) {
+            ArrayList<Integer> current = charranges.get(rng.nextInt(charranges.size()));
+            out += Character.toString((char)(rng.nextInt((current.get(1) - current.get(0)) + 1) + current.get(0)));
+        }
+        return Collect.asArray(out);
+    }
+
+    @Override
+    public boolean isSingle() {
+        return true;
+    }
+
+    @Override
+    public Class<? extends String> getReturnType() {
+        return String.class;
+    }
+
+    @Override
+    public String toString(@Nullable Event event, boolean b) {
+        return "random";
+    }
+
+    @Override
+    public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
+        length = (Expression<Number>) expressions[0];
+        charset = (Expression<Markup>) expressions[1];
+        return true;
+    }
+}

@@ -4,30 +4,36 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.util.packet.Particle;
+import com.w00tmast3r.skquery.util.packet.particle.Particle;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-
-@Patterns("spawn %number% of %particle% data %number% offset with %number%, %number%, %number% at %locations%")
+@Name("Play Particle")
+@Description("Play particle effects at a certain location.")
+@Patterns("spawn %number% [of] %particle% at %locations% [to %-players%]")
 public class EffParticle extends Effect {
 
     private Expression<Particle> effect;
-    private Expression<Number> data, amt, x, y, z;
+    private Expression<Number> amt;
     private Expression<Location> loc;
+    private Expression<Player> player;
 
     @Override
     protected void execute(Event event) {
         Particle e = effect.getSingle(event);
-        Number d = data.getSingle(event);
         Number a = amt.getSingle(event);
-        Number xO = x.getSingle(event);
-        Number yO = y.getSingle(event);
-        Number zO = z.getSingle(event);
-        if(e == null || d == null || a == null || xO == null || yO == null || zO == null) return;
+        Player[] list;
+        if (player == null) list = Bukkit.getOnlinePlayers();
+        else list = player.getAll(event);
+        if(e == null || a == null) return;
+        e.setAmount(a.intValue());
         for (Location l : loc.getAll(event)) {
-            Particle.play(e.getId(), l, a.intValue(), xO.floatValue(), yO.floatValue(), zO.floatValue(), d.intValue());
+            e.play(l, list);
         }
     }
 
@@ -40,11 +46,8 @@ public class EffParticle extends Effect {
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         amt = (Expression<Number>) expressions[0];
         effect = (Expression<Particle>) expressions[1];
-        data = (Expression<Number>) expressions[2];
-        x = (Expression<Number>) expressions[3];
-        y = (Expression<Number>) expressions[4];
-        z = (Expression<Number>) expressions[5];
-        loc = (Expression<Location>) expressions[6];
+        loc = (Expression<Location>) expressions[2];
+        player = (Expression<Player>) expressions[3];
         return true;
     }
 }

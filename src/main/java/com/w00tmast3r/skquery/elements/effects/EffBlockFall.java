@@ -5,6 +5,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.Reflection;
 import org.bukkit.Location;
@@ -14,7 +16,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
 
-
+@Name("Spawn Falling Block")
+@Description("Summons falling blocks with modifiable properties.")
 @Patterns({"spawn falling block of %itemtype% at %location%",
         "spawn damaging falling block of %itemtype% at %location%",
         "spawn undroppable falling block of %itemtype% at %location%",

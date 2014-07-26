@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.RenderTask;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
@@ -14,7 +16,9 @@ import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapCursor;
 import org.bukkit.map.MapView;
 
-
+@Name("Draw Cursor on Map")
+@Description("Draw a cursor on a map written after running ((EffManageMap)Manage Map). Currently not functional.")
+@Deprecated
 @Patterns("draw cursor %mapcursortype% pointing %number% on [map] %number% at %number%, %number%")
 public class EffDrawCursor extends Effect {
 

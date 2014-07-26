@@ -5,10 +5,13 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.event.Event;
 
-
+@Name("Is Block")
+@Description("Checks whether or not a certain itemtype is a placeable block.")
 @Patterns({"%itemtype% is [a] block",
         "%itemtype% is not [a] block"})
 public class CondIsBlock extends Condition {

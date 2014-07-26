@@ -1,5 +1,5 @@
 name: SkQuery
 author: w00tmast3r
-version: 3.0.0.0
+version: 3.0.0-SNAPSHOT
 depend: [Skript]
 main: com.w00tmast3r.skquery.SkQuery

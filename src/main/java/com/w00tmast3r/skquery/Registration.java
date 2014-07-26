@@ -88,10 +88,18 @@ public class Registration {
                         }
                     }
                 }
+                if (a instanceof AntiDependency) {
+                    for (String s : ((AntiDependency) a).value()) {
+                        if (Bukkit.getPluginManager().getPlugin(s) != null) {
+                            continue main;
+                        }
+                    }
+                }
             }
             if (Effect.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {
                     Skript.registerEffect(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                    Documentation.addEffect(c);
                     success++;
                 } else {
                     Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
@@ -99,6 +107,7 @@ public class Registration {
             } else if (Condition.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {
                     Skript.registerCondition(c, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                    Documentation.addCondition(c);
                     success++;
                 } else {
                     Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " is patternless and failed to register. This is most likely a code error.");
@@ -108,6 +117,7 @@ public class Registration {
                     try {
                         Expression ex = (Expression) c.newInstance();
                         Skript.registerExpression(c, ex.getReturnType(), ExpressionType.PROPERTY, ((Patterns) c.getAnnotation(Patterns.class)).value());
+                        Documentation.addExpression(c);
                         success++;
                     } catch (InstantiationException e) {
                         Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " could not be instantiated by skQuery!");

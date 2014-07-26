@@ -4,12 +4,16 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.serialization.InventorySerialUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-
+@Name("Restore Inventory")
+@Description("Restores a player's inventory to a backup. This effect is deprecated and you should use ((ExprInventorySerials)Inventory Serials) instead.")
+@Deprecated
 @Patterns("restore inventory [of] %player% (to|from) %string%")
 public class EffDeserializeReturn extends Effect {
 

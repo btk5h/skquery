@@ -4,13 +4,16 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.util.Vector;
 
-
+@Name("Entity Homing")
+@Description("Cause an entity to home towards a locations. Specifying 'normally' reduces bugs caused by varying distances, but makes it less accurate.")
 @Patterns({"make %entity% home towards %location%",
         "make %entity% home towards %location% normally"})
 public class EffHoming extends Effect {

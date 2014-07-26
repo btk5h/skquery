@@ -67,14 +67,14 @@ public class Reflection {
     public static Method getMethod(Class<?> clazz, String name,
                                    Class<?>... args) {
         for (Method m : clazz.getMethods())
-            if (m.getName().equals(name) && (args.length == 0 || ClassListEqual(args, m.getParameterTypes()))) {
+            if (m.getName().equals(name) && (args.length == 0 || classesEqual(args, m.getParameterTypes()))) {
                 m.setAccessible(true);
                 return m;
             }
         return null;
     }
 
-    public static boolean ClassListEqual(Class<?>[] l1, Class<?>[] l2) {
+    public static boolean classesEqual(Class<?>[] l1, Class<?>[] l2) {
         boolean equal = true;
         if (l1.length != l2.length)
             return false;

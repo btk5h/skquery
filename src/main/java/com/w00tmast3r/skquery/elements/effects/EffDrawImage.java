@@ -4,6 +4,8 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.RenderTask;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
@@ -17,7 +19,8 @@ import org.bukkit.map.MapView;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 
-
+@Name("Draw Image on Map")
+@Description("Accepts an image and draws it on a map written after running ((EffManageMap)Manage Map) on it. Omitting the position to draw the image draws it starting from the top left corner.")
 @Patterns({"draw [buffered[ ]]image %image% on [map] %number%",
         "draw [buffered[ ]]image %image% on [map] %number% [starting] from %number%, %number%"})
 public class EffDrawImage extends Effect {

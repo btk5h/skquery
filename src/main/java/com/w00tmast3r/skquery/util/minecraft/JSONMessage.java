@@ -103,7 +103,7 @@ public class JSONMessage {
             return this;
         }
     }
-
+    /*
     public JSONMessage tooltip(final String text) {
         return tooltip(text.split("\\n"));
     }
@@ -111,13 +111,17 @@ public class JSONMessage {
     public JSONMessage tooltip(final List<String> lines) {
         return tooltip((String[])lines.toArray());
     }
+    */
 
     public JSONMessage tooltip(final String... lines) {
-        if (lines.length == 1) {
-            onHover("show_text", lines[0]);
-        } else {
-            itemTooltip(makeMultilineTooltip(lines));
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < lines.length; i++){
+            builder.append(lines[i]);
+            if(i != lines.length - 1){
+                builder.append('\n');
+            }
         }
+        onHover("show_text", builder.toString());
         return this;
     }
 
@@ -173,7 +177,7 @@ public class JSONMessage {
     private MessagePart latest() {
         return messageParts.get(messageParts.size() - 1);
     }
-
+    /*
     private String makeMultilineTooltip(final String[] lines) {
         StringWriter string = new StringWriter();
         JsonWriter json = new JsonWriter(string);
@@ -193,6 +197,7 @@ public class JSONMessage {
         }
         return string.toString();
     }
+    */
 
     private void onClick(final String name, final String data) {
         final MessagePart latest = latest();

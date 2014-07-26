@@ -4,12 +4,15 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.custom.region.CuboidRegion;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 
-
+@Name("Is Within Cuboid")
+@Description("Checks whether or not a certain location is included in a 3d cube with 2 endpoints.")
 @Patterns({"%location% is within %location% to %location%",
         "%location% is not within %location% to %location%"})
 public class CondIsWithin extends Condition {

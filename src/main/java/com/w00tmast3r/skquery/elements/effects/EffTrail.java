@@ -10,7 +10,7 @@ import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.CancellableBukkitTask;
-import com.w00tmast3r.skquery.util.packet.Particle;
+import com.w00tmast3r.skquery.util.packet.particle.Particle;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -29,7 +29,7 @@ public class EffTrail extends Effect {
         CancellableBukkitTask task = new CancellableBukkitTask() {
             @Override
             public void run() {
-                Particle.play(p.getId(), e.getEntity().getLocation(), 1, 0, 0, 0, 0);
+                p.play(e.getEntity().getLocation(), Bukkit.getOnlinePlayers());
                 if(!e.getEntity().isValid() || e.getEntity().isOnGround()) {
                     cancel();
                 }
