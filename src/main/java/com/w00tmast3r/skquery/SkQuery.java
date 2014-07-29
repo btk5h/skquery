@@ -3,6 +3,7 @@ package com.w00tmast3r.skquery;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import com.w00tmast3r.skquery.util.custom.menus.v2_.FormattedSlotManager;
+import com.w00tmast3r.skquery.db.ScriptCredentials;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +23,11 @@ public final class SkQuery extends JavaPlugin {
         Registration.enableSnooper();
         Bukkit.getPluginManager().registerEvents(new FormattedSlotManager(), this);
         Documentation.generateDocs();
+    }
+
+    @Override
+    public void onDisable() {
+        ScriptCredentials.clear();
     }
 
     public static SkQuery getInstance() {

@@ -1,5 +1,6 @@
 name: SkQuery
 author: w00tmast3r
-version: 3.0.0-SNAPSHOT
+version: 3.5.0
 depend: [Skript]
+soft-depend: [ProtocolLib]
 main: com.w00tmast3r.skquery.SkQuery
