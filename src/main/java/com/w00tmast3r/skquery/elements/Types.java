@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.NotSerializableException;
 import java.io.StreamCorruptedException;
+import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -280,5 +281,59 @@ public class Types extends AbstractTask {
                         return false;
                     }
                 }));
+
+        Classes.registerClass(new ClassInfo<ResultSet>(ResultSet.class, "queryresult")
+                .parser(new Parser<ResultSet>() {
+                    @Override
+                    public ResultSet parse(String s, ParseContext parseContext) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return false;
+                    }
+
+                    @Override
+                    public String toString(ResultSet resultSet, int i) {
+                        return resultSet.toString();
+                    }
+
+                    @Override
+                    public String toVariableNameString(ResultSet resultSet) {
+                        return resultSet.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                })
+                /*.serializer(new Serializer<ResultSet>() {
+                    @Override
+                    public Fields serialize(ResultSet resultSet) throws NotSerializableException {
+                        return new Fields();
+                    }
+
+                    @Override
+                    public void deserialize(ResultSet resultSet, Fields fieldContexts) throws StreamCorruptedException, NotSerializableException {
+                        assert false;
+                    }
+
+                    @Override
+                    protected ResultSet deserialize(Fields fields) throws StreamCorruptedException, NotSerializableException {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean mustSyncDeserialization() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean canBeInstantiated(Class<? extends ResultSet> aClass) {
+                        return false;
+                    }
+                })*/);
     }
 }
