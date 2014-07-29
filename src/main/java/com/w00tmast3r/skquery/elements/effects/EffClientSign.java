@@ -24,14 +24,13 @@ public class EffClientSign extends Effect {
 
     @Override
     protected void execute(Event event) {
-        Player[] ps = player.getAll(event);
         Block b = block.getSingle(event);
         String a1 = l1.getSingle(event);
         String a2 = l2.getSingle(event);
         String a3 = l3.getSingle(event);
         String a4 = l4.getSingle(event);
-        if(ps == null || b == null || (b.getType() != Material.SIGN_POST || b.getType() != Material.WALL_SIGN)) return;
-        for(Player p : ps){
+        if(b == null || (b.getType() != Material.SIGN_POST || b.getType() != Material.WALL_SIGN)) return;
+        for(Player p : player.getAll(event)){
             p.sendSignChange(b.getLocation(), Collect.asArray(a1, a2, a3, a4));
         }
     }
