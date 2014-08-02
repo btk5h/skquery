@@ -16,6 +16,10 @@ public class Particle {
     private int amount = 1;
     private final String particle;
 
+    public Particle() {
+        particle = "";
+    }
+
     public Particle(String particle) {
         this.particle = particle;
     }

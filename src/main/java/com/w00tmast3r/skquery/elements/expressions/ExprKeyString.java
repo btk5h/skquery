@@ -28,25 +28,7 @@ public class ExprKeyString extends SimpleExpression<String> {
         if (l == null || mk == null) return null;
         int amt = l.intValue();
         String chars = mk.toString();
-
-        ArrayList<ArrayList<Integer>> charranges = new ArrayList<ArrayList<Integer>>();
-        Pattern regex = Pattern.compile("(.)-(.)");
-        Matcher m = regex.matcher(chars);
-        while (m.find()) {
-            ArrayList<Integer> range = new ArrayList<Integer>();
-            int first = m.group(1).charAt(0);
-            int second = m.group(2).charAt(0);
-            range.add(Math.min(first, second));
-            range.add(Math.max(first, second));
-            charranges.add(range);
-        }
-        Random rng = new Random();
-        String out = "";
-        while (0 < amt--) {
-            ArrayList<Integer> current = charranges.get(rng.nextInt(charranges.size()));
-            out += Character.toString((char)(rng.nextInt((current.get(1) - current.get(0)) + 1) + current.get(0)));
-        }
-        return Collect.asArray(out);
+        return Collect.asArray(getKey(amt, chars));
     }
 
     @Override
@@ -69,5 +51,26 @@ public class ExprKeyString extends SimpleExpression<String> {
         length = (Expression<Number>) expressions[0];
         charset = (Expression<Markup>) expressions[1];
         return true;
+    }
+
+    public static String getKey(int length, String charset) {
+        ArrayList<ArrayList<Integer>> charranges = new ArrayList<ArrayList<Integer>>();
+        Pattern regex = Pattern.compile("(.)-(.)");
+        Matcher m = regex.matcher(charset);
+        while (m.find()) {
+            ArrayList<Integer> range = new ArrayList<Integer>();
+            int first = m.group(1).charAt(0);
+            int second = m.group(2).charAt(0);
+            range.add(Math.min(first, second));
+            range.add(Math.max(first, second));
+            charranges.add(range);
+        }
+        Random rng = new Random();
+        String out = "";
+        while (0 < length--) {
+            ArrayList<Integer> current = charranges.get(rng.nextInt(charranges.size()));
+            out += Character.toString((char)(rng.nextInt((current.get(1) - current.get(0)) + 1) + current.get(0)));
+        }
+        return out;
     }
 }
