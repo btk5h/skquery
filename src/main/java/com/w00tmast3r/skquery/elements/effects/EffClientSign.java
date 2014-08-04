@@ -5,6 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.Collect;
@@ -14,7 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 @Name("Client Sign")
-@Description("Cause a sign to have custom")
+@Description("Cause a sign to have custom lines to certain viewers")
+@Examples("command /hidesign:;->trigger:;->->make all players see lines of targeted block as \"\", \"\", \"\", \"\"")
 @Patterns("make %players% see lines of %block% as %string%, %string%, %string%[ and], %string%")
 public class EffClientSign extends Effect {
 

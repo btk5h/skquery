@@ -5,11 +5,16 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.event.Event;
 
-
-@Patterns("escape %number% [(levels|lines)]")
+@Name("Escape Lines")
+@Description("Skip the execution of a certain number of lines.")
+@Examples("on script load:;->escape 1;->stop;->message \"Stop avoided!\" to console")
+@Patterns("escape %number% [(level[s]|line[s])]")
 public class EffEscape extends Effect {
 
     private Expression<Number> esc;

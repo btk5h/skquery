@@ -11,6 +11,7 @@ import com.w00tmast3r.skquery.util.packet.PlayerDisplayChanger;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
+@Deprecated
 @Dependency("ProtocolLib")
 @Patterns("change appearance of %players% to [skin of] %string% named %string%")
 public class EffChangeSkin extends Effect {

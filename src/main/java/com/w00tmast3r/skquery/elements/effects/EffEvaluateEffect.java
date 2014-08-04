@@ -6,6 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.skript.Markup;
@@ -13,6 +14,7 @@ import org.bukkit.event.Event;
 
 @Name("Evaluate Input Effect")
 @Description("Runs the input string relative to the calling trigger which invoked it.")
+@Examples("command /effectcommand <text>:;->trigger:;->->evaluate argument")
 @Patterns({"evaluate %string/markup%", "^%markup%"})
 public class EffEvaluateEffect extends Effect {
 

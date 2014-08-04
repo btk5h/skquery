@@ -6,6 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.Reflection;
@@ -18,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 
 @Name("Spawn Falling Block")
 @Description("Summons falling blocks with modifiable properties.")
+@Examples("on place of dirt:;->cancel event;->spawn falling block of dirt at block")
 @Patterns({"spawn falling block of %itemtype% at %location%",
         "spawn damaging falling block of %itemtype% at %location%",
         "spawn undroppable falling block of %itemtype% at %location%",

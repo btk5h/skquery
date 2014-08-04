@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 @Name("Launch Fireworks")
-@Description("Launch a firework with any number of firework effects at a given location and flight duration. Use ((ExprFireworkEffect)this expression) to create firework effects.")
+@Description("Launch a firework with any number of firework effects at a given location and flight duration. Use (../expressions/(ExprFireworkEffect)this expression) to create firework effects.")
 @Patterns("(launch|deploy) %fireworkeffects% at %locations% (with duration|timed) %number%")
 public class EffLaunch extends Effect {
 

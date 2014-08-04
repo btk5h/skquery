@@ -23,7 +23,6 @@ public final class SkQuery extends JavaPlugin {
         addonInstance = Skript.registerAddon(this);
         Registration.enableSnooper();
         Bukkit.getPluginManager().registerEvents(new FormattedSlotManager(), this);
-        Documentation.generateDocs();
     }
 
     @Override

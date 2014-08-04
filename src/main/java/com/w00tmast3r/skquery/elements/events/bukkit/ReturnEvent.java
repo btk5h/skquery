@@ -1,18 +1,14 @@
 package com.w00tmast3r.skquery.elements.events.bukkit;
 
-import ch.njol.skript.lang.Expression;
-import com.w00tmast3r.skquery.elements.effects.EffSync;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class ReturnEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private final Expression<?> args;
-    private final EffSync invoker;
+    private final Event invoker;
 
-    public ReturnEvent(EffSync invoker, Expression<?> args) {
-        this.args = args;
+    public ReturnEvent(Event invoker) {
         this.invoker = invoker;
     }
 
@@ -25,11 +21,7 @@ public class ReturnEvent extends Event {
         return handlers;
     }
 
-    public EffSync getInvoker() {
+    public Event getInvoker() {
         return invoker;
-    }
-
-    public Expression<?> getArgs() {
-        return args;
     }
 }

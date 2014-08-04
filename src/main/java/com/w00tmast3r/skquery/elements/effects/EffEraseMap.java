@@ -5,6 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.maps.SkriptMapRenderer;
@@ -13,7 +14,8 @@ import org.bukkit.event.Event;
 import org.bukkit.map.MapView;
 
 @Name("Erase Map")
-@Description("Completely removes all tasks run on a map. Overwrites ((EffDrawImage)Draw Image)), ((EffDrawText)Draw Text)), and ((EffDrawCursor)Draw Cursor)).")
+@Description("Completely removes all tasks run on a map. Overwrites ((EffDrawImage)Draw Image), ((EffDrawText)Draw Text), and ((EffDrawCursor)Draw Cursor).")
+@Examples("on script load:;->erase map 0")
 @Patterns("(erase|wipe) [map] %number%")
 public class EffEraseMap extends Effect {
 

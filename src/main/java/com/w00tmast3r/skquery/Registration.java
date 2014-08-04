@@ -131,6 +131,7 @@ public class Registration {
                         Skript.registerExpression(c, ex.getReturnType(), ExpressionType.PROPERTY,
                                 "[the] " + ((PropertyTo) c.getAnnotation(PropertyTo.class)).value() + " of %" + ((PropertyFrom) c.getAnnotation(PropertyFrom.class)).value() + "%",
                                 "%" + ((PropertyFrom) c.getAnnotation(PropertyFrom.class)).value() + "%'[s] " + ((PropertyTo) c.getAnnotation(PropertyTo.class)).value());
+                        Documentation.addExpression(c);
                         success++;
                     } catch (InstantiationException e) {
                         Bukkit.getLogger().info("[skQuery] " + c.getCanonicalName() + " could not be instantiated by skQuery!");

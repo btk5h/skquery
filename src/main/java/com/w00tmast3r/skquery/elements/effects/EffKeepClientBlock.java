@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @Name("Server/Client Block")
-@Description("Make a player see a block as another type of block. If the client recieves an update to the block, it will not revert like with ((EffClientBlock)).")
+@Description("Make a player see a block as another type of block. If the client recieves an update to the block, it will not revert like with ((EffClientBlock)the client block effect).")
 @Dependency("ProtocolLib")
 @Patterns({"make %players% see %blocks% as %itemtype% permanently",
     "restore updates to %blocks% for %offlineplayers%",

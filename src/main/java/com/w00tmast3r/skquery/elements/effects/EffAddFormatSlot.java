@@ -5,6 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.custom.menus.v2_.FormattedSlotManager;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 @Name("Format Inventory Slot")
 @Description("Formats a slot in the player's open inventory to do certain actions. This should be done directly after showing an inventory to the player.")
+@Examples("command /construct:;->trigger:;->->open chest with 1 rows named \"&4My first test menu\" to player;->->format slot 0 of player with 5 of steak named \"Item 1\" to close then run \"say The first item was clicked! Menu Closed!\";->->format slot 2 of player with fire named \"Close Menu\" with lore \"I will close this menu.||Nothing more, nothing less.\" to close")
 @Patterns({
         "format slot %number% of %players% with %itemstack% to close then run %string%",
         "format slot %number% of %players% with %itemstack% to run %string%",

@@ -14,8 +14,8 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-@Name("")
-@Description("")
+@Name("Display Scoreboard")
+@Description("Display a new scoreboard to a player. Overwrites existing scoreboards.")
 @Deprecated
 @Patterns("display [score]board named %string% to %player%")
 public class EffDisplayScoreboard extends Effect {

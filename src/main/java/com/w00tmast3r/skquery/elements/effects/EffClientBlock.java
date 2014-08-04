@@ -6,6 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.event.Event;
 
 @Name("Client Block")
 @Description("Make a player see a block as another type of block. If the client recieves an update to the block, it will revert.")
+@Examples("on click:;->make player see clicked block as air")
 @Patterns("make %players% see %block% as %itemtype%")
 public class EffClientBlock extends Effect {
 

@@ -53,7 +53,7 @@ public class Documentation {
                     writer.write("<span class=\"ui red ribbon label deprecated\">Deprecated</span><br/>");
                     writer.newLine();
                 }
-                writer.write("<h3 class=\"ui header\">" + (e.isAnnotationPresent(Name.class) ? e.getAnnotation(Name.class).value() : (e.getSimpleName().startsWith("Expr") ? e.getSimpleName().substring(4) : e.getSimpleName())) + "</h3>");
+                writer.write("<h3 class=\"ui header\">" + (e.isAnnotationPresent(Name.class) ? e.getAnnotation(Name.class).value() : (Effect.class.isAssignableFrom(e) ? e.getSimpleName().substring(3) : e.getSimpleName().substring(4))) + "</h3>");
                 writer.newLine();
                 writer.write("<div class=\"ui two column grid\">");
                 writer.newLine();
@@ -62,7 +62,7 @@ public class Documentation {
                 writer.write("<p>");
                 writer.newLine();
                 if (e.isAnnotationPresent(Description.class)) {
-                    writer.write(e.getAnnotation(Description.class).value().replaceAll("\\(\\(([^\\(\\)]+)\\)([^\\(\\)]+)\\)", "<a href=\"#$1\">$2</a>"));
+                    writer.write(e.getAnnotation(Description.class).value().replaceAll("\\(([^\\(\\)]+)?\\(([^\\(\\)]+)\\)([^\\(\\)]+)\\)", "<a href=\"$1#$2\">$3</a>"));
                     writer.newLine();
                 }
                 writer.write("</p>");
