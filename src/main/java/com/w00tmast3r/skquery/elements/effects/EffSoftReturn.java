@@ -5,7 +5,6 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
-import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
@@ -15,18 +14,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 
 
-@Patterns("return")
-public class EffReturn extends Effect {
+@Patterns("soft return")
+public class EffSoftReturn extends Effect {
 
     @Override
     protected void execute(Event event) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    protected TriggerItem walk(Event e) {
-        Bukkit.getPluginManager().callEvent(new ReturnEvent(((FunctionEvent) e).getInvoker()));
-        return null;
+        Bukkit.getPluginManager().callEvent(new ReturnEvent(((FunctionEvent) event).getInvoker()));
     }
 
     @Override

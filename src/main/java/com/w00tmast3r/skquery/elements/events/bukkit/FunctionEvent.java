@@ -1,6 +1,5 @@
 package com.w00tmast3r.skquery.elements.events.bukkit;
 
-import com.w00tmast3r.skquery.elements.effects.EffSync;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -9,9 +8,9 @@ public class FunctionEvent extends Event {
     private static HandlerList handlers = new HandlerList();
     private final String cause;
     private final Object[] params;
-    private final EffSync invoker;
+    private final Event invoker;
 
-    public FunctionEvent(String cause, Object[] params, EffSync invoker) {
+    public FunctionEvent(String cause, Object[] params, Event invoker) {
         this.cause = cause;
         this.params = params;
         this.invoker = invoker;
@@ -26,7 +25,7 @@ public class FunctionEvent extends Event {
         return handlers;
     }
 
-    public EffSync getInvoker() {
+    public Event getInvoker() {
         return invoker;
     }
 
