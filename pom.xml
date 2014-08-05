@@ -41,6 +41,11 @@
             <scope>provided</scope>
             <version>3.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm-commons</artifactId>
+            <version>3.3.1</version>
+        </dependency>
     </dependencies>
 
 </project>

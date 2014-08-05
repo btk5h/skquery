@@ -10,7 +10,6 @@ public class TransEventObjects {
 
     public static void store(Event key, Object value) {
         limbo.put(key, value);
-
     }
 
     public static Object retrieve(Event key) {
