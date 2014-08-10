@@ -5,6 +5,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.FireworkEffect;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 @Name("Launch Fireworks")
 @Description("Launch a firework with any number of firework effects at a given location and flight duration. Use (../expressions/(ExprFireworkEffect)this expression) to create firework effects.")
+@Examples("on death:;->launch creeper firework colored red at victim timed 1")
 @Patterns("(launch|deploy) %fireworkeffects% at %locations% (with duration|timed) %number%")
 public class EffLaunch extends Effect {
 

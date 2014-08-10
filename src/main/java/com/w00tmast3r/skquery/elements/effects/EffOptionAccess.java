@@ -7,6 +7,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.elements.effects.base.Pragma;
 import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
@@ -15,6 +17,8 @@ import org.bukkit.event.Event;
 import java.io.File;
 import java.lang.reflect.Method;
 
+@Name("Level Access")
+@Description("Usable in functions. Modifies the next line to be run in the scope of code which called the function. Data declared within the function may not be accessed. Use (../expressions/(ExprTransientObject)this expression) to carry data between these scopes.")
 @Patterns("$ access")
 public class EffOptionAccess extends Pragma {
     @Override

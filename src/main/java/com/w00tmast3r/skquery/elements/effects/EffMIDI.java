@@ -6,6 +6,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.custom.note.MidiUtil;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 
 @Name("Play MIDI")
 @Description("Plays a file with the extention .mid to a player.")
+@Examples("on join:;->play midi \"login\" to player")
 @Patterns("play midi %string% to %players%")
 public class EffMIDI extends Effect {
 

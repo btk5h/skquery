@@ -6,6 +6,8 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.SkQuery;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
 import com.w00tmast3r.skquery.elements.events.bukkit.ReturnEvent;
@@ -14,7 +16,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-
+@Name("Invoke Cross Access")
+@Description("Permits a function to retrieve and inject data from the current event. The current code block will not continue until the function calls ((EffReturn)return) or ((EffSoftReturn)soft return).")
 @Patterns({"access %string%", "access %string% from %objects%"})
 public class EffAccess extends Effect implements Listener {
 
@@ -60,10 +63,6 @@ public class EffAccess extends Effect implements Listener {
             cause = (Expression<String>) expressions[0];
             args = (Expression<Object>) expressions[1];
         }
-        /*[9:31:45 PM] [Libra] w00tmast3r: function "dickbutt":
-    set limbo "vagina" to 1
-    $ access
-    set {_return} to limbo "vagina"*/
         return true;
     }
 }

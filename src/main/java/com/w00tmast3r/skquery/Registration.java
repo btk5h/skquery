@@ -95,6 +95,7 @@ public class Registration {
                         }
                     }
                 }
+                if (a instanceof Disabled) continue main;
             }
             if (Effect.class.isAssignableFrom(c)) {
                 if (c.isAnnotationPresent(Patterns.class)) {

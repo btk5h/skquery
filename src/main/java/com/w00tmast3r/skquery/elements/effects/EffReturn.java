@@ -8,13 +8,16 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
+import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
 import com.w00tmast3r.skquery.elements.events.bukkit.ReturnEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 
-
+@Name("Return")
+@Description("Allows the code that called a function to continue. Works as a \"stop\", preventing code after it from executing. If you want to let the following code execute, use ((EffSoftReturn)soft return)")
 @Patterns("return")
 public class EffReturn extends Effect {
 

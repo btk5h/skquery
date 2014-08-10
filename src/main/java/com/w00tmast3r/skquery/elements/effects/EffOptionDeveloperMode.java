@@ -4,6 +4,7 @@ import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.lang.SkriptParser;
 import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.Description;
+import com.w00tmast3r.skquery.api.Examples;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.elements.effects.base.OptionsPragma;
@@ -18,6 +19,7 @@ import java.lang.reflect.Method;
 
 @Name("Developer Mode Option")
 @Description("Enable the developer mode pragma to auto reload a script as it changes.  This must be placed under the script-local options.")
+@Examples("script options:;->$ developer mode")
 @Patterns("$ developer mode")
 public class EffOptionDeveloperMode extends OptionsPragma {
 
