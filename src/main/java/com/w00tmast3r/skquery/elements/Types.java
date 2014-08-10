@@ -10,9 +10,11 @@ import com.w00tmast3r.skquery.api.AbstractTask;
 import com.w00tmast3r.skquery.skript.Markup;
 import com.w00tmast3r.skquery.util.ImageUtils;
 import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
+import com.w00tmast3r.skquery.util.packet.BossBars;
 import com.w00tmast3r.skquery.util.packet.particle.Particle;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleType;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleTypes;
+import org.bukkit.Bukkit;
 import org.bukkit.FireworkEffect;
 
 import java.awt.image.BufferedImage;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.io.NotSerializableException;
 import java.io.StreamCorruptedException;
 import java.sql.ResultSet;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -335,5 +338,62 @@ public class Types extends AbstractTask {
                         return false;
                     }
                 })*/);
+
+
+        Classes.registerClass(new ClassInfo<BossBars.BossBarProxy>(BossBars.BossBarProxy.class, "bossbar")
+                .parser(new Parser<BossBars.BossBarProxy>() {
+                    @Override
+                    public BossBars.BossBarProxy parse(String s, ParseContext parseContext) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return false;
+                    }
+
+                    @Override
+                    public String toString(BossBars.BossBarProxy bar, int i) {
+                        return bar.getText();
+                    }
+
+                    @Override
+                    public String toVariableNameString(BossBars.BossBarProxy bar) {
+                        return bar.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                })
+                .serializer(new Serializer<BossBars.BossBarProxy>() {
+                    @Override
+                    public Fields serialize(BossBars.BossBarProxy bar) throws NotSerializableException {
+                        Fields f = new Fields();
+                        f.putObject("id", bar.getPlayer().getUniqueId().toString());
+                        return f;
+                    }
+
+                    @Override
+                    public void deserialize(BossBars.BossBarProxy bar, Fields fieldContexts) throws StreamCorruptedException, NotSerializableException {
+                        assert false;
+                    }
+
+                    @Override
+                    protected BossBars.BossBarProxy deserialize(Fields fields) throws StreamCorruptedException, NotSerializableException {
+                        return new BossBars.BossBarProxy(Bukkit.getOfflinePlayer(UUID.fromString((String) fields.getObject("id"))));
+                    }
+
+                    @Override
+                    public boolean mustSyncDeserialization() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean canBeInstantiated(Class<? extends BossBars.BossBarProxy> aClass) {
+                        return false;
+                    }
+                }));
     }
 }
