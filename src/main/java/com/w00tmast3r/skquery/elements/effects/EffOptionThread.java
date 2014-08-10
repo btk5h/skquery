@@ -41,8 +41,10 @@ public class EffOptionThread extends Pragma {
                 if (toWalk.isDone()) {
                     try {
                         TriggerItem.walk(toWalk.get(), e);
-                    } catch (Exception ex) {
+                    } catch (ExecutionException ex) {
                         ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        if (getNext() != null) TriggerItem.walk(getNext().getNext(), e);
                     }
                     cancel();
                 }
@@ -56,7 +58,7 @@ public class EffOptionThread extends Pragma {
         return staticThreadPool.submit(new Callable<TriggerItem>() {
             @Override
             public TriggerItem call() throws Exception {
-                walkMethod.invoke(next);
+                walkMethod.invoke(next, e);
                 return next.getNext();
             }
         });
