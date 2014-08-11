@@ -1,6 +1,7 @@
 package com.w00tmast3r.skquery.elements.effects;
 
 import ch.njol.skript.aliases.ItemType;
+import ch.njol.skript.effects.EffSpawn;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -29,7 +30,7 @@ public class EffBlockFall extends Effect {
 
     private Expression<ItemType> type;
     private Expression<Location> loc;
-    boolean breaks, damages;
+    private boolean breaks, damages;
 
     @Override
     protected void execute(Event event) {
@@ -38,6 +39,7 @@ public class EffBlockFall extends Effect {
         for(Location locs : loc.getArray(event)) {
             for(ItemStack i : t.getAll()){
                 FallingBlock block = locs.getWorld().spawnFallingBlock(locs, i.getType(), (byte) i.getDurability());
+                EffSpawn.lastSpawned = block;
                 if (damages) {
                     try {
                         Object craftSand = Reflection.obcClass("entity.CraftFallingSand").getMethod("getHandle").invoke(block);
