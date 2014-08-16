@@ -3,9 +3,10 @@ package com.w00tmast3r.skquery.elements.events;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.w00tmast3r.skquery.api.AbstractTask;
-import com.w00tmast3r.skquery.elements.events.lang.ScriptOptionsEvent;
+import com.w00tmast3r.skquery.elements.events.bukkit.AttachedTabCompleteEvent;
 import com.w00tmast3r.skquery.elements.events.lang.FunctionEvent;
 import com.w00tmast3r.skquery.elements.events.lang.RoutineEvent;
+import com.w00tmast3r.skquery.elements.events.lang.ScriptOptionsEvent;
 import com.w00tmast3r.skquery.util.custom.projectile.ItemProjectileHitEvent;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -19,7 +20,6 @@ import org.bukkit.event.entity.HorseJumpEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.bukkit.event.player.PlayerEditBookEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -149,13 +149,13 @@ public class EventRegistry extends AbstractTask {
             }
         }, 0);
 
-        registerEvent("Script Options Header", ScriptOptionsEvent.class, "script options");
+        registerEvent("*Script Options Header", ScriptOptionsEvent.class, "script options");
 
-        registerEvent("Tab Complete", PlayerChatTabCompleteEvent.class, "tab complete");
-        EventValues.registerEventValue(PlayerChatTabCompleteEvent.class, Player.class, new Getter<Player, PlayerChatTabCompleteEvent>() {
+        registerEvent("*Tab Complete", EvtAttachCompleter.class, AttachedTabCompleteEvent.class, "tab complet(er|ion) [for [command]] %string%");
+        EventValues.registerEventValue(AttachedTabCompleteEvent.class, Player.class, new Getter<Player, AttachedTabCompleteEvent>() {
             @Override
-            public Player get(PlayerChatTabCompleteEvent playerChatTabCompleteEvent) {
-                return playerChatTabCompleteEvent.getPlayer();
+            public Player get(AttachedTabCompleteEvent attachedTabCompleteEvent) {
+                return attachedTabCompleteEvent.getSender() instanceof Player ? ((Player) attachedTabCompleteEvent.getSender()) : null;
             }
         }, 0);
     }
