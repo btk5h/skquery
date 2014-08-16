@@ -23,7 +23,7 @@ public class ExprTabCompleteArgument extends SimpleExpression<String> {
         Number n = num.getSingle(e);
         if (n == null) return null;
         try {
-            return Collect.asArray(((AttachedTabCompleteEvent) e).getArgs()[n.intValue() + 1]);
+            return Collect.asArray(((AttachedTabCompleteEvent) e).getArgs()[n.intValue() - 1]);
         } catch (IndexOutOfBoundsException ex) {
             return null;
         }
