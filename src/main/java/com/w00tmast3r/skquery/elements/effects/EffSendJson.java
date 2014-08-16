@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 
-@Patterns("(send|message) %jsonmessage% to %players%")
+@Patterns("[jsonmessage] (send|message) %jsonmessage% to %players%")
 public class EffSendJson extends Effect {
 
     private Expression<JSONMessage> json;
