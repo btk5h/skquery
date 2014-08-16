@@ -3,6 +3,7 @@ package com.w00tmast3r.skquery;
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import com.w00tmast3r.skquery.db.ScriptCredentials;
+import com.w00tmast3r.skquery.skript.DynamicEnumTypes;
 import com.w00tmast3r.skquery.util.custom.menus.v2_.FormattedSlotManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,7 +19,7 @@ public final class SkQuery extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //DynamicEnumTypes.register();
+        DynamicEnumTypes.register();
         getDataFolder().mkdirs();
         addonInstance = Skript.registerAddon(this);
         Registration.enableSnooper();
