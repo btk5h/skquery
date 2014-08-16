@@ -10,8 +10,8 @@ import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Description;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
-import com.w00tmast3r.skquery.elements.events.bukkit.ReturnEvent;
+import com.w00tmast3r.skquery.elements.events.lang.FunctionEvent;
+import com.w00tmast3r.skquery.elements.events.lang.ReturnEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 

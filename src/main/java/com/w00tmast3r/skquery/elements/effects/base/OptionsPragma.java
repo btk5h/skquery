@@ -5,7 +5,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.w00tmast3r.skquery.elements.events.bukkit.ScriptOptionsEvent;
+import com.w00tmast3r.skquery.elements.events.lang.ScriptOptionsEvent;
 
 public abstract class OptionsPragma extends Pragma {
 

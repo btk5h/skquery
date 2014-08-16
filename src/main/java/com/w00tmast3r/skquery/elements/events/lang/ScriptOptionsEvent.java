@@ -1,11 +1,11 @@
-package com.w00tmast3r.skquery.elements.events.bukkit;
+package com.w00tmast3r.skquery.elements.events.lang;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class ContinueEvent extends Event {
+public class ScriptOptionsEvent extends Event {
 
-    private static final HandlerList handlers = new HandlerList();
+    private static HandlerList handlers = new HandlerList();
 
     @Override
     public HandlerList getHandlers() {

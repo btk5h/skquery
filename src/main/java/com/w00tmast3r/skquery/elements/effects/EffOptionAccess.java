@@ -11,7 +11,7 @@ import com.w00tmast3r.skquery.api.Description;
 import com.w00tmast3r.skquery.api.Name;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.elements.effects.base.Pragma;
-import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
+import com.w00tmast3r.skquery.elements.events.lang.FunctionEvent;
 import org.bukkit.event.Event;
 
 import java.io.File;
