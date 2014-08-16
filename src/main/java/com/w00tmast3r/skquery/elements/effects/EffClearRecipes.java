@@ -12,7 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 
 @Name("Clear Server Recipes")
-@Description("Clears all recipes registered in the server.")
+@Description("Clears all recipes registered in the server. Use ((EffClearRecipe)this effect) to clear individual recipes.")
 @Examples("on script load:;->wipe server crafting recipes")
 @Patterns("wipe server crafting recipes")
 public class EffClearRecipes extends Effect {

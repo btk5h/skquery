@@ -8,8 +8,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.elements.events.bukkit.FunctionEvent;
-import com.w00tmast3r.skquery.elements.events.bukkit.RoutineEvent;
+import com.w00tmast3r.skquery.elements.events.lang.FunctionEvent;
+import com.w00tmast3r.skquery.elements.events.lang.RoutineEvent;
 import org.bukkit.event.Event;
 
 
