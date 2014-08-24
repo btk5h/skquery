@@ -18,7 +18,7 @@ public class Lambda {
     }
 
     public Lambda add(Lambda e) {
-        chain.addAll(e.getChain());
+        if (e != null) chain.addAll(e.getChain());
         return this;
     }
 
