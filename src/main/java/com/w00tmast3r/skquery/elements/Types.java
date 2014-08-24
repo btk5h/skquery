@@ -1,20 +1,22 @@
 package com.w00tmast3r.skquery.elements;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.classes.Serializer;
+import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.ParseContext;
+import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
 import com.w00tmast3r.skquery.api.AbstractTask;
+import com.w00tmast3r.skquery.skript.Lambda;
 import com.w00tmast3r.skquery.skript.Markup;
 import com.w00tmast3r.skquery.util.ImageUtils;
 import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
-import com.w00tmast3r.skquery.util.packet.BossBars;
 import com.w00tmast3r.skquery.util.packet.particle.Particle;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleType;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleTypes;
-import org.bukkit.Bukkit;
 import org.bukkit.FireworkEffect;
 
 import java.awt.image.BufferedImage;
@@ -22,7 +24,6 @@ import java.io.IOException;
 import java.io.NotSerializableException;
 import java.io.StreamCorruptedException;
 import java.sql.ResultSet;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -339,7 +340,7 @@ public class Types extends AbstractTask {
                     }
                 })*/);
 
-
+        /*
         Classes.registerClass(new ClassInfo<BossBars.BossBarProxy>(BossBars.BossBarProxy.class, "bossbar")
                 .parser(new Parser<BossBars.BossBarProxy>() {
                     @Override
@@ -395,5 +396,43 @@ public class Types extends AbstractTask {
                         return false;
                     }
                 }));
-    }
+        */
+
+        Classes.registerClass(new ClassInfo<Lambda>(Lambda.class, "lambda")
+                .parser(new Parser<Lambda>() {
+                    @Override
+                    public Lambda parse(String s, ParseContext parseContext) {
+                        if (s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
+                            Effect e = Effect.parse(s.substring(1, s.length() - 1), null);
+                            if (e == null) {
+                                Skript.error(s + " is not a valid lambda statement.", ErrorQuality.SEMANTIC_ERROR);
+                            } else {
+                                return new Lambda(e);
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public String toString(Lambda lambda, int i) {
+                        return lambda.toString();
+                    }
+
+                    @Override
+                    public String toVariableNameString(Lambda lambda) {
+                        return lambda.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                }));
+    } 
+    
 }
