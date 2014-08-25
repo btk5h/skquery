@@ -9,11 +9,10 @@ import com.w00tmast3r.skquery.api.Patterns;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-@Patterns({"%boolean%", "not %boolean%"})
+@Patterns({"%boolean%"})
 public class CondBoolean extends Condition {
 
     private Expression<Boolean> bool;
-    boolean negated;
 
     @Override
     public boolean check(Event e) {
@@ -22,7 +21,7 @@ public class CondBoolean extends Condition {
             public boolean check(Boolean o) {
                 return o;
             }
-        }, negated);
+        });
     }
 
     @Override
@@ -33,7 +32,6 @@ public class CondBoolean extends Condition {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         bool = (Expression<Boolean>) exprs[0];
-        negated = matchedPattern == 1;
         return true;
     }
 }
