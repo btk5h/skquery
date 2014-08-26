@@ -31,7 +31,7 @@ public class ExprTabCompleteArgument extends SimpleExpression<String> {
 
     @Override
     public boolean isSingle() {
-        return false;
+        return true;
     }
 
     @Override
