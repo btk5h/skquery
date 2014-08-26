@@ -9,12 +9,15 @@ import java.util.Collection;
 public class Lambda {
 
     private final ArrayList<Effect> chain = new ArrayList<Effect>();
+    private final boolean isVoid;
 
-    public Lambda() {
+    public Lambda(boolean isVoid) {
+        this.isVoid = isVoid;
     }
 
     public Lambda(Effect e) {
         chain.add(e);
+        isVoid = false;
     }
 
     public Lambda add(Lambda e) {
@@ -23,6 +26,7 @@ public class Lambda {
     }
 
     public Collection<Effect> getChain() {
+        if (isVoid) return new ArrayList<Effect>();
         return chain;
     }
 
@@ -30,5 +34,9 @@ public class Lambda {
         for (Effect effect : chain) {
             effect.run(e);
         }
+    }
+
+    public boolean isVoid() {
+        return isVoid;
     }
 }

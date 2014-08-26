@@ -403,6 +403,7 @@ public class Types extends AbstractTask {
                     @Override
                     public Lambda parse(String s, ParseContext parseContext) {
                         if (s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
+                            if ("void".equals(s.substring(1, s.length() - 1))) return new Lambda(true);
                             Effect e = Effect.parse(s.substring(1, s.length() - 1), null);
                             if (e == null) {
                                 Skript.error(s + " is not a valid lambda statement.", ErrorQuality.SEMANTIC_ERROR);

@@ -20,7 +20,7 @@ public class ExprLambdaConcatenate extends SimpleExpression<Lambda> {
         Lambda b = base.getSingle(e);
         Lambda t = tail.getSingle(e);
         if (b == null || t == null) return null;
-        return Collect.asArray(new Lambda().add(b).add(t));
+        return Collect.asArray(new Lambda(false).add(b).add(t));
     }
 
     @Override
