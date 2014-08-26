@@ -8,7 +8,7 @@ import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.skript.Lambda;
 import org.bukkit.event.Event;
 
-@Patterns("execute %lambda%")
+@Patterns("do %lambda%")
 public class EffExecuteLambda extends Effect {
 
     private Expression<Lambda> effect;
