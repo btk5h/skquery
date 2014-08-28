@@ -15,10 +15,10 @@ import org.eclipse.jdt.annotation.Nullable;
 
 @Patterns({"%object%[ ]==[ ]%object%",
         "%object%[ ]===[ ]%object%",
-        "object[ ]\\>[ ]%object%",
-        "object[ ]\\<[ ]%object%",
-        "object[ ]\\>=[ ]%object%",
-        "object[ ]\\<=[ ]%object%"})
+        "%object%[ ]\\>[ ]%object%",
+        "%object%[ ]\\<[ ]%object%",
+        "%object%[ ]\\>=[ ]%object%",
+        "%object%[ ]\\<=[ ]%object%"})
 public class ExprComparisons extends SimpleExpression<Boolean> {
 
     private Expression<?> first, second;
