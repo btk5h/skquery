@@ -13,8 +13,8 @@ import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-@Patterns({"%object%[ ]==[ ]%object%",
-        "%object%[ ]===[ ]%object%",
+@Patterns({"%object%[ ]===[ ]%object%",
+        "%object%[ ]==[ ]%object%",
         "%object%[ ]\\>[ ]%object%",
         "%object%[ ]\\<[ ]%object%",
         "%object%[ ]\\>=[ ]%object%",
