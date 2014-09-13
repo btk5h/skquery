@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -149,7 +150,15 @@ public class ExprYAMLValue extends SimpleExpression<Object> {
                 case LIST:
                     switch (mode) {
                         case ADD:
-                            ((List<Object>) cfg.getList(p)).add(delta[0]);
+                            cfg.createSection(p);
+                            List<Object> obj = (List<Object>) cfg.getList(p);
+                            if (obj == null) {
+                                obj = new ArrayList<Object>();
+                                obj.add(delta[0]);
+                                cfg.set(p, obj);
+                            } else {
+                                obj.add(delta[0]);
+                            }
                             break;
                         case REMOVE:
                             cfg.getList(p).remove(delta[0]);
