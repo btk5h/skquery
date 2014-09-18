@@ -19,8 +19,8 @@ import org.bukkit.inventory.ItemStack;
 @Description("Formats a slot in the player's open inventory to do certain actions. This should be done directly after showing an inventory to the player.")
 @Examples("command /construct:;->trigger:;->->open chest with 1 rows named \"&4My first test menu\" to player;->->format slot 0 of player with 5 of steak named \"Item 1\" to close then run \"say The first item was clicked! Menu Closed!\";->->format slot 2 of player with fire named \"Close Menu\" with lore \"I will close this menu.||Nothing more, nothing less.\" to close")
 @Patterns({
-        "format slot %number% of %players% with %itemstack% to close then run %string%",
-        "format slot %number% of %players% with %itemstack% to run %string%",
+        "format slot %number% of %players% with %itemstack% to close then run %string/lambda%",
+        "format slot %number% of %players% with %itemstack% to run %string/lambda%",
         "format slot %number% of %players% with %itemstack% to close",
         "format slot %number% of %players% with %itemstack% to (be|act) unstealable",
         "unformat slot %number% of %players%"
@@ -30,13 +30,13 @@ public class EffAddFormatSlot extends Effect {
     private Expression<Number> slot;
     private Expression<Player> targets;
     private Expression<ItemStack> item;
-    private Expression<String> callback;
+    private Expression<?> callback;
     private int action;
 
     @Override
     protected void execute(Event event) {
         Number s = slot.getSingle(event);
-        String c;
+        Object c;
         ItemStack i = null;
         if (s == null) return;
         SlotRule toClone;
@@ -77,7 +77,7 @@ public class EffAddFormatSlot extends Effect {
             }
         }
         for (Player p : targets.getAll(event)) {
-            if (p.getOpenInventory().getType() != InventoryType.CRAFTING) FormattedSlotManager.addRule(p, s.intValue(), toClone.getCopy());
+            if (p.getOpenInventory().getType() != InventoryType.CRAFTING) FormattedSlotManager.addRule(event, p, s.intValue(), toClone.getCopy());
         }
     }
 
@@ -91,7 +91,7 @@ public class EffAddFormatSlot extends Effect {
         slot = (Expression<Number>) expressions[0];
         targets = (Expression<Player>) expressions[1];
         if (i <= 3) item = (Expression<ItemStack>) expressions[2];
-        if (i <= 1) callback = (Expression<String>) expressions[3];
+        if (i <= 1) callback = expressions[3];
         action = i;
         return true;
     }

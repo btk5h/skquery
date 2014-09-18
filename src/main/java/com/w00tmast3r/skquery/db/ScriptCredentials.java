@@ -42,7 +42,15 @@ public class ScriptCredentials {
 
     public static ScriptCredentials get(File script) {
         if (!credentials.containsKey(script)) credentials.put(script, new ScriptCredentials());
-        return credentials.get(script);
+        ScriptCredentials c = credentials.get(script);
+        try {
+            if (c.connection != null && !c.connection.isValid(1)) {
+                 c.validate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
     }
 
     public static void clear() {
