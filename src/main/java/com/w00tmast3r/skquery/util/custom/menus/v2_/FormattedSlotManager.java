@@ -56,7 +56,7 @@ public class FormattedSlotManager implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         final Player p = (Player) event.getWhoClicked();
-        final HashMap<Integer, SlotRule> map = playerRules.get(p.getUniqueId()).getFirst();
+        final HashMap<Integer, SlotRule> map = getRules(p);
         if (event.isShiftClick() && map != null && map.size() > 0) event.setCancelled(true);
         assert map != null;
         if (playerRules.containsKey(p.getUniqueId()) && event.getSlotType() == InventoryType.SlotType.CONTAINER && map.get(event.getSlot()) != null) {
@@ -83,8 +83,11 @@ public class FormattedSlotManager implements Listener {
         Bukkit.getScheduler().runTaskLater(SkQuery.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if (playerRules.get(event.getPlayer().getUniqueId()) != null) playerRules.get(event.getPlayer().getUniqueId()).getFirst().clear();
-                playerRules.get(event.getPlayer().getUniqueId()).setSecond(null);
+                if (playerRules.containsKey(event.getPlayer().getUniqueId())) {
+                    if (playerRules.get(event.getPlayer().getUniqueId()) != null)
+                        playerRules.get(event.getPlayer().getUniqueId()).getFirst().clear();
+                    playerRules.get(event.getPlayer().getUniqueId()).setSecond(null);
+                }
             }
         }, 1);
     }
