@@ -150,8 +150,7 @@ public class ExprYAMLValue extends SimpleExpression<Object> {
                 case LIST:
                     switch (mode) {
                         case ADD:
-                            cfg.createSection(p);
-                            List<Object> obj = (List<Object>) cfg.getList(p);
+                            List obj = cfg.getList(p);
                             if (obj == null) {
                                 obj = new ArrayList<Object>();
                                 obj.add(delta[0]);
