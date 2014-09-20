@@ -5,22 +5,32 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.skript.Lambda;
+import com.w00tmast3r.skquery.skript.LambdaCondition;
+import com.w00tmast3r.skquery.skript.LambdaEffect;
 import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-@Patterns("%lambda%-\\>%lambda%")
-public class ExprLambdaConcatenate extends SimpleExpression<Lambda> {
+@Patterns({"%lambda%-\\>%lambda%",
+        "%predicate%-\\>%predicate%"})
+public class ExprLambdaConcatenate extends SimpleExpression<Object> {
 
-    private Expression<Lambda> base, tail;
+    private Expression base, tail;
+    private int match = -1;
 
     @Override
-    protected Lambda[] get(Event e) {
-        Lambda b = base.getSingle(e);
-        Lambda t = tail.getSingle(e);
-        if (b == null || t == null) return null;
-        return Collect.asArray(new Lambda(false).add(b).add(t));
+    protected Object[] get(Event e) {
+        if (match == 0) {
+            LambdaEffect b = ((Expression<LambdaEffect>) base).getSingle(e);
+            LambdaEffect t = ((Expression<LambdaEffect>) tail).getSingle(e);
+            if (b == null || t == null) return null;
+            return Collect.asArray(new LambdaEffect(false).add(b).add(t));
+        } else {
+            LambdaCondition b = ((Expression<LambdaCondition>) base).getSingle(e);
+            LambdaCondition t = ((Expression<LambdaCondition>) tail).getSingle(e);
+            if (b == null || t == null) return null;
+            return Collect.asArray(new LambdaCondition(null).add(b).add(t));
+        }
     }
 
     @Override
@@ -29,8 +39,8 @@ public class ExprLambdaConcatenate extends SimpleExpression<Lambda> {
     }
 
     @Override
-    public Class<? extends Lambda> getReturnType() {
-        return Lambda.class;
+    public Class<?> getReturnType() {
+        return match == -1 ? Object.class : match == 0 ? LambdaEffect.class : LambdaCondition.class;
     }
 
     @Override
@@ -40,8 +50,9 @@ public class ExprLambdaConcatenate extends SimpleExpression<Lambda> {
 
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        base = (Expression<Lambda>) exprs[0];
-        tail = (Expression<Lambda>) exprs[1];
+        base = exprs[0];
+        tail = exprs[1];
+        match = matchedPattern;
         return true;
     }
 }

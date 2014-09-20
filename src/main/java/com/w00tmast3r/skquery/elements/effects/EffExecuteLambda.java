@@ -5,18 +5,18 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.skript.Lambda;
+import com.w00tmast3r.skquery.skript.LambdaEffect;
 import org.bukkit.event.Event;
 
 @Patterns("do %lambda%")
 public class EffExecuteLambda extends Effect {
 
-    private Expression<Lambda> effect;
+    private Expression<LambdaEffect> effect;
 
 
     @Override
     protected void execute(Event event) {
-        Lambda l = effect.getSingle(event);
+        LambdaEffect l = effect.getSingle(event);
         if (l == null) return;
         l.walk(event);
     }
@@ -28,7 +28,7 @@ public class EffExecuteLambda extends Effect {
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
-        effect = (Expression<Lambda>) expressions[0];
+        effect = (Expression<LambdaEffect>) expressions[0];
         return true;
     }
 }

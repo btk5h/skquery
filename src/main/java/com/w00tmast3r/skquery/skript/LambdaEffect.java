@@ -6,21 +6,21 @@ import org.bukkit.event.Event;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Lambda {
+public class LambdaEffect {
 
     private final ArrayList<Effect> chain = new ArrayList<Effect>();
     private final boolean isVoid;
 
-    public Lambda(boolean isVoid) {
+    public LambdaEffect(boolean isVoid) {
         this.isVoid = isVoid;
     }
 
-    public Lambda(Effect e) {
-        chain.add(e);
+    public LambdaEffect(Effect e) {
+        if (e != null) chain.add(e);
         isVoid = false;
     }
 
-    public Lambda add(Lambda e) {
+    public LambdaEffect add(LambdaEffect e) {
         if (e != null) chain.addAll(e.getChain());
         return this;
     }

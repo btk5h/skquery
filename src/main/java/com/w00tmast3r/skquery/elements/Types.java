@@ -4,13 +4,15 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.classes.Serializer;
+import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
 import com.w00tmast3r.skquery.api.AbstractTask;
-import com.w00tmast3r.skquery.skript.Lambda;
+import com.w00tmast3r.skquery.skript.LambdaCondition;
+import com.w00tmast3r.skquery.skript.LambdaEffect;
 import com.w00tmast3r.skquery.skript.Markup;
 import com.w00tmast3r.skquery.util.ImageUtils;
 import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
@@ -398,17 +400,16 @@ public class Types extends AbstractTask {
                 }));
         */
 
-        Classes.registerClass(new ClassInfo<Lambda>(Lambda.class, "lambda")
-                .parser(new Parser<Lambda>() {
+        Classes.registerClass(new ClassInfo<LambdaCondition>(LambdaCondition.class, "predicate")
+                .parser(new Parser<LambdaCondition>() {
                     @Override
-                    public Lambda parse(String s, ParseContext parseContext) {
-                        if (s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
-                            if ("void".equals(s.substring(1, s.length() - 1))) return new Lambda(true);
-                            Effect e = Effect.parse(s.substring(1, s.length() - 1), null);
+                    public LambdaCondition parse(String s, ParseContext parseContext) {
+                        if (s.length() > 2 && s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
+                            Condition e = Condition.parse(s.substring(1, s.length() - 1), null);
                             if (e == null) {
                                 Skript.error(s + " is not a valid lambda statement.", ErrorQuality.SEMANTIC_ERROR);
                             } else {
-                                return new Lambda(e);
+                                return new LambdaCondition(e);
                             }
                         }
                         return null;
@@ -420,13 +421,50 @@ public class Types extends AbstractTask {
                     }
 
                     @Override
-                    public String toString(Lambda lambda, int i) {
-                        return lambda.toString();
+                    public String toString(LambdaCondition lambdaCondition, int i) {
+                        return lambdaCondition.toString();
                     }
 
                     @Override
-                    public String toVariableNameString(Lambda lambda) {
-                        return lambda.toString();
+                    public String toVariableNameString(LambdaCondition lambdaCondition) {
+                        return lambdaCondition.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                }));
+
+        Classes.registerClass(new ClassInfo<LambdaEffect>(LambdaEffect.class, "lambda")
+                .parser(new Parser<LambdaEffect>() {
+                    @Override
+                    public LambdaEffect parse(String s, ParseContext parseContext) {
+                        if (s.length() > 3 && s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
+                            if ("void".equals(s.substring(1, s.length() - 1))) return new LambdaEffect(true);
+                            Effect e = Effect.parse(s.substring(1, s.length() - 1), null);
+                            if (e == null) {
+                                Skript.error(s + " is not a valid lambda statement.", ErrorQuality.SEMANTIC_ERROR);
+                            } else {
+                                return new LambdaEffect(e);
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    public boolean canParse(ParseContext context) {
+                        return true;
+                    }
+
+                    @Override
+                    public String toString(LambdaEffect lambdaEffect, int i) {
+                        return lambdaEffect.toString();
+                    }
+
+                    @Override
+                    public String toVariableNameString(LambdaEffect lambdaEffect) {
+                        return lambdaEffect.toString();
                     }
 
                     @Override
