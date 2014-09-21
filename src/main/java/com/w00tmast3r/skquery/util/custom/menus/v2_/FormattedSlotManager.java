@@ -36,9 +36,10 @@ public class FormattedSlotManager implements Listener {
 
     public static void addRule(Event e, Player player, int slot, SlotRule rule) {
         if (!playerRules.containsKey(player.getUniqueId())) {
-            playerRules.put(player.getUniqueId(), new BiValue<HashMap<Integer, SlotRule>, Event>(new HashMap<Integer, SlotRule>(), e));
+            playerRules.put(player.getUniqueId(), new BiValue<HashMap<Integer, SlotRule>, Event>(new HashMap<Integer, SlotRule>(), null));
         }
         playerRules.get(player.getUniqueId()).getFirst().put(slot, rule);
+        playerRules.get(player.getUniqueId()).setSecond(e);
     }
 
     public static void removeRule(Player player, int slot) {
