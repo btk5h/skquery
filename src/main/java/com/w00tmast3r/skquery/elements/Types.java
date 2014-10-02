@@ -31,6 +31,11 @@ import java.util.regex.Pattern;
 
 public class Types extends AbstractTask {
 
+    private static final Pattern BLOCKDUST = Pattern.compile("block\\s?dust(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)");
+    private static final Pattern BLOCKCRACK = Pattern.compile("block\\s?crack(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)");
+    private static final Pattern ICONCRACK = Pattern.compile("icon\\s?crack(?:\\s|_)([0-9]+)");
+    private static final Pattern ICONCRACKDATA = Pattern.compile("icon\\s?crack(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)");
+
     @Override
     public void run() {
         Classes.registerClass(new ClassInfo<BufferedImage>(BufferedImage.class, "image")
@@ -165,15 +170,18 @@ public class Types extends AbstractTask {
                         try {
                             return new ParticleType(ParticleTypes.valueOf(s.replace(" ", "_").toUpperCase().trim()));
                         } catch (IllegalArgumentException e) {
-                            Matcher blockdust = Pattern.compile("block\\s?dust(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)").matcher(s);
-                            Matcher blockcrack = Pattern.compile("block\\s?crack(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)").matcher(s);
-                            Matcher iconcrack = Pattern.compile("icon\\s?crack(?:\\s|_)([0-9]+)").matcher(s);
+                            Matcher blockdust = BLOCKDUST.matcher(s);
+                            Matcher blockcrack = BLOCKCRACK.matcher(s);
+                            Matcher iconcrack = ICONCRACK.matcher(s);
+                            Matcher iconcrackdata = ICONCRACKDATA.matcher(s);
                             if (blockdust.matches()) {
                                 return new ParticleType("blockdust_" + blockdust.group(1) + "_" + blockdust.group(2));
                             } else if (blockcrack.matches()) {
                                 return new ParticleType("blockcrack_" + blockcrack.group(1) + "_" + blockcrack.group(2));
                             } else if (iconcrack.matches()) {
                                 return new ParticleType("iconcrack_" + iconcrack.group(1));
+                            } else if (iconcrackdata.matches()) {
+                                return new ParticleType("iconcrack_" + iconcrackdata.group(1) + "_" + iconcrackdata.group(2));
                             }
                         }
                         return null;
