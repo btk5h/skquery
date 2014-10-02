@@ -37,7 +37,7 @@ public class EffInvoke extends Effect {
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         str = (Expression<String>) expressions[0];
-        if(i == 1) args = (Expression<Object>) expressions[1];
+        if(i == 1) args = (Expression<Object>) expressions[1].getConvertedExpression(Object.class);
         return true;
     }
 }
