@@ -11,6 +11,7 @@ import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
 import com.w00tmast3r.skquery.api.AbstractTask;
+import com.w00tmast3r.skquery.skript.Dynamic;
 import com.w00tmast3r.skquery.skript.LambdaCondition;
 import com.w00tmast3r.skquery.skript.LambdaEffect;
 import com.w00tmast3r.skquery.skript.Markup;
@@ -520,7 +521,7 @@ public class Types extends AbstractTask {
                     public Fields serialize(Color o) throws NotSerializableException {
                         Fields f = new Fields();
                         f.putPrimitive("rgb", o.asRGB());
-                        return null;
+                        return f;
                     }
 
                     @Override
@@ -541,8 +542,8 @@ public class Types extends AbstractTask {
                     @Override
                     public boolean canBeInstantiated(Class<? extends Color> c) {
                         return false;
-                }
+                    }
                 }));
-    } 
-    
+    }
+
 }
