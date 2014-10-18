@@ -64,16 +64,18 @@ public class ExprPlayerPermissions extends SimpleExpression<String> {
 
     @Override
     public Class<?>[] acceptChange(Changer.ChangeMode mode) {
-        if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE) return Collect.asArray(String.class);
+        if (mode == Changer.ChangeMode.ADD || mode == Changer.ChangeMode.REMOVE) return Collect.asArray(String[].class);
         return null;
     }
 
     @Override
     public void change(Event e, @Nullable Object[] delta, Changer.ChangeMode mode) {
-        String s = delta[0] == null ? "" : (String) delta[0];
+        if (delta == null) return;
         for (Player p : player.getAll(e)) {
             PermissionAttachment perm = PermissionsHandler.getPermissions(p);
-            perm.setPermission(s, mode == Changer.ChangeMode.ADD);
+            for (Object s : delta) {
+                perm.setPermission(((String) s), mode == Changer.ChangeMode.ADD);
+            }
         }
     }
 }
