@@ -19,6 +19,7 @@ import com.w00tmast3r.skquery.util.minecraft.JSONMessage;
 import com.w00tmast3r.skquery.util.packet.particle.Particle;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleType;
 import com.w00tmast3r.skquery.util.packet.particle.ParticleTypes;
+import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 
 import java.awt.image.BufferedImage;
@@ -35,6 +36,7 @@ public class Types extends AbstractTask {
     private static final Pattern BLOCKCRACK = Pattern.compile("block\\s?crack(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)");
     private static final Pattern ICONCRACK = Pattern.compile("icon\\s?crack(?:\\s|_)([0-9]+)");
     private static final Pattern ICONCRACKDATA = Pattern.compile("icon\\s?crack(?:\\s|_)([0-9]+)(?:\\s|_)([0-9]+)");
+    private static final Pattern RGB_COLOR = Pattern.compile("([0-9]{1,3})\\s*,\\s*([0-9]{1,3})\\s*,\\s*([0-9]{1,3})");
 
     @Override
     public void run() {
@@ -479,6 +481,67 @@ public class Types extends AbstractTask {
                     public String getVariableNamePattern() {
                         return ".+";
                     }
+                }));
+
+        Classes.registerClass(new ClassInfo<Color>(Color.class, "rgbcolor")
+                .parser(new Parser<Color>() {
+                    @Override
+                    public Color parse(final String s, final ParseContext context) {
+                        Matcher m = RGB_COLOR.matcher(s);
+                        if (m.matches()) {
+                            int r = Integer.parseInt(m.group(1));
+                            int g = Integer.parseInt(m.group(2));
+                            int b = Integer.parseInt(m.group(3));
+                            if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) return null;
+                            return Color.fromRGB(r, g, b);
+                        }
+                        ch.njol.skript.util.Color c =  ch.njol.skript.util.Color.byName(s);
+                        if (c == null) return null;
+                        return c.getBukkitColor();
+                    }
+
+                    @Override
+                    public String toString(final Color c, final int flags) {
+                        return c.toString();
+                    }
+
+                    @Override
+                    public String toVariableNameString(final Color o) {
+                        return o.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                })
+                .serializer(new Serializer<Color>() {
+                    @Override
+                    public Fields serialize(Color o) throws NotSerializableException {
+                        Fields f = new Fields();
+                        f.putPrimitive("rgb", o.asRGB());
+                        return null;
+                    }
+
+                    @Override
+                    public void deserialize(Color o, Fields f) throws StreamCorruptedException, NotSerializableException {
+                        assert false;
+                    }
+
+                    @Override
+                    protected Color deserialize(Fields fields) throws StreamCorruptedException, NotSerializableException {
+                        return Color.fromRGB(fields.getPrimitive("rgb", int.class));
+                    }
+
+                    @Override
+                    public boolean mustSyncDeserialization() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean canBeInstantiated(Class<? extends Color> c) {
+                        return false;
+                }
                 }));
     } 
     

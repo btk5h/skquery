@@ -3,17 +3,18 @@ package com.w00tmast3r.skquery.elements.expressions;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
-import ch.njol.skript.util.Color;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.util.Collect;
+import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.event.Event;
 
 
-@Patterns({"(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %colors%",
-        "(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %colors% fad(e|ing) [to] %colors%"
-})
+@Patterns({"(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %rgbcolors%",
+        "(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %rgbcolors% fad(e|ing) [to] %rgbcolors%",
+        "(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %rgbcolors%",
+        "(1¦|2¦flickering |3¦trailing |4¦flickering trailing |5¦trailing flickering )%fireworktype% firework [effect] colored %rgbcolors% fad(e|ing) [to] %rgbcolors%"})
 public class ExprFireworkEffect extends SimpleExpression<FireworkEffect> {
 
     private Expression<FireworkEffect.Type> type;
@@ -29,11 +30,11 @@ public class ExprFireworkEffect extends SimpleExpression<FireworkEffect> {
         FireworkEffect.Builder builder = FireworkEffect.builder();
         builder.with(t);
         for (Color c : color.getAll(event)) {
-            builder.withColor(c.getBukkitColor());
+            builder.withColor(c);
         }
         if (hasFade) {
             for (Color c : fade.getAll(event)) {
-                builder.withFade(c.getBukkitColor());
+                builder.withFade(c);
             }
         }
         builder.flicker(flicker);
