@@ -38,6 +38,8 @@ public class ExprInventorySerials extends SimplePropertyExpression<Inventory, St
     public void change(Event e, Object[] delta, Changer.ChangeMode mode) {
         String s = delta[0] == null ? "" : (String) delta[0];
         Inventory i = getExpr().getSingle(e);
-        i.setContents(InventorySerialUtils.fromBase64(s).getContents());
+        try {
+            i.setContents(InventorySerialUtils.fromBase64(s).getContents());
+        } catch (Exception ignored) {}
     }
 }
