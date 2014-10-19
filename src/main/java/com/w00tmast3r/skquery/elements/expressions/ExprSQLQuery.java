@@ -7,33 +7,41 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.util.Kleenean;
+import com.sun.rowset.CachedRowSetImpl;
 import com.w00tmast3r.skquery.api.Patterns;
-import com.w00tmast3r.skquery.util.Collect;
 import com.w00tmast3r.skquery.db.ScriptCredentials;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.File;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 @Patterns("result of query %string%")
-public class ExprSQLQuery extends SimpleExpression<ResultSet> {
+public class ExprSQLQuery extends SimpleExpression<CachedRowSetImpl> {
 
     private File executor;
     private Expression<String> query;
 
     @Override
-    protected ResultSet[] get(Event event) {
+    protected CachedRowSetImpl[] get(Event event) {
         String q = query.getSingle(event);
         if (q == null) return null;
         Statement st = null;
         try {
             st = ScriptCredentials.get(executor).getConnection().createStatement();
-            return Collect.asArray(st.executeQuery(q));
+            CachedRowSetImpl out = new CachedRowSetImpl();
+            out.populate(st.executeQuery(q));
+            return Collect.asArray(out);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (st != null) try {
+                st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -44,8 +52,8 @@ public class ExprSQLQuery extends SimpleExpression<ResultSet> {
     }
 
     @Override
-    public Class<? extends ResultSet> getReturnType() {
-        return ResultSet.class;
+    public Class<? extends CachedRowSetImpl> getReturnType() {
+        return CachedRowSetImpl.class;
     }
 
     @Override

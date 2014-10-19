@@ -10,6 +10,7 @@ import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.yggdrasil.Fields;
+import com.sun.rowset.CachedRowSetImpl;
 import com.w00tmast3r.skquery.api.AbstractTask;
 import com.w00tmast3r.skquery.skript.Dynamic;
 import com.w00tmast3r.skquery.skript.LambdaCondition;
@@ -27,7 +28,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.NotSerializableException;
 import java.io.StreamCorruptedException;
-import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -299,10 +299,10 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<ResultSet>(ResultSet.class, "queryresult")
-                .parser(new Parser<ResultSet>() {
+        Classes.registerClass(new ClassInfo<CachedRowSetImpl>(CachedRowSetImpl.class, "queryresult")
+                .parser(new Parser<CachedRowSetImpl>() {
                     @Override
-                    public ResultSet parse(String s, ParseContext parseContext) {
+                    public CachedRowSetImpl parse(String s, ParseContext parseContext) {
                         return null;
                     }
 
@@ -312,13 +312,13 @@ public class Types extends AbstractTask {
                     }
 
                     @Override
-                    public String toString(ResultSet resultSet, int i) {
-                        return resultSet.toString();
+                    public String toString(CachedRowSetImpl rowSet, int i) {
+                        return rowSet.toString();
                     }
 
                     @Override
-                    public String toVariableNameString(ResultSet resultSet) {
-                        return resultSet.toString();
+                    public String toVariableNameString(CachedRowSetImpl rowSet) {
+                        return rowSet.toString();
                     }
 
                     @Override
@@ -543,6 +543,56 @@ public class Types extends AbstractTask {
                     public boolean canBeInstantiated(Class<? extends Color> c) {
                         return false;
                     }
+                }));
+
+        Classes.registerClass(new ClassInfo<Dynamic>(Dynamic.class, "dynamic")
+                .parser(new Parser<Dynamic>() {
+                    @Override
+                    public Dynamic parse(final String s, final ParseContext context) {
+                        return null;
+                    }
+
+                    @Override
+                    public String toString(final Dynamic d, final int flags) {
+                        return d.toString();
+                    }
+
+                    @Override
+                    public String toVariableNameString(final Dynamic o) {
+                        return o.toString();
+                    }
+
+                    @Override
+                    public String getVariableNamePattern() {
+                        return ".+";
+                    }
+                })
+                .serializer(new Serializer<Dynamic>() {
+                    @Override
+                    public Fields serialize(Dynamic o) throws NotSerializableException {
+                        Fields f = new Fields();
+                        return f;
+                    }
+
+                    @Override
+                    public void deserialize(Dynamic o, Fields f) throws StreamCorruptedException, NotSerializableException {
+                        assert false;
+                    }
+
+                    @Override
+                    protected Dynamic deserialize(Fields fields) throws StreamCorruptedException, NotSerializableException {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean mustSyncDeserialization() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean canBeInstantiated(Class<? extends Dynamic> c) {
+                        return false;
+                }
                 }));
     }
 
