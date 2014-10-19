@@ -3,7 +3,7 @@ package com.w00tmast3r.skquery.elements.events.lang;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class FunctionEvent extends Event {
+public class FunctionEvent extends Event implements MethodEvent {
 
     private static HandlerList handlers = new HandlerList();
     private final String cause;
@@ -29,6 +29,7 @@ public class FunctionEvent extends Event {
         return invoker;
     }
 
+    @Override
     public String getCause() {
         return cause;
     }
