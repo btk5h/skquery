@@ -13,6 +13,7 @@ import com.w00tmast3r.skquery.db.ScriptCredentials;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
+import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,9 +26,10 @@ public class ExprSQLQueryObjects extends SimpleExpression<Object> {
     @Override
     protected Object[] get(Event event) {
         try {
-            CachedRowSetImpl q = query.getSingle(event);
+            CachedRowSet q = query.getSingle(event);
             String c = column.getSingle(event);
             if (q == null || c == null) return null;
+            q = q.createCopy();
             ArrayList<Object> output = new ArrayList<Object>();
             while (q.next()) {
                 output.add(q.getObject(c));
