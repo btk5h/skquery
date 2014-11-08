@@ -17,10 +17,10 @@ import java.util.HashMap;
 
 public class Documentation {
 
-    private static HashMap<Class, String[]> events = new HashMap<Class, String[]>();
-    private static ArrayList<Class> conditions = new ArrayList<Class>();
-    private static ArrayList<Class> effects = new ArrayList<Class>();
-    private static ArrayList<Class> expressions = new ArrayList<Class>();
+    private static HashMap<Class, String[]> events = new HashMap<>();
+    private static ArrayList<Class> conditions = new ArrayList<>();
+    private static ArrayList<Class> effects = new ArrayList<>();
+    private static ArrayList<Class> expressions = new ArrayList<>();
 
 
 
@@ -41,8 +41,7 @@ public class Documentation {
     private static void generateDocsFor(Collection<Class> classes, String filename) throws IOException {
         File html = new File(SkQuery.getInstance().getDataFolder().getAbsolutePath() + File.separator + filename + ".html");
         html.createNewFile();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(html));
-        try {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(html))) {
             for (Class<?> e : classes) {
                 if (e.isAnnotationPresent(DocumentationHidden.class)) continue;
                 writer.write("<div class=\"column\">");
@@ -139,8 +138,6 @@ public class Documentation {
                     writer.write("<a href=\"#" + e.getSimpleName() + "\" class=\"item\">" + (e.isAnnotationPresent(Name.class) ? e.getAnnotation(Name.class).value() : (e.getSimpleName().startsWith("Expr") ? e.getSimpleName().substring(4) : e.getSimpleName())) + "</a>");
                 }
             }
-        } finally {
-            writer.close();
         }
     }
 

@@ -23,7 +23,7 @@ public class ExprLoadedChunks extends SimpleExpression<Chunk> {
 
     @Override
     protected Chunk[] get(Event event) {
-        ArrayList<Chunk> chunks = new ArrayList<Chunk>();
+        ArrayList<Chunk> chunks = new ArrayList<>();
         for (World w : worlds.getAll(event)) {
             chunks.addAll(Arrays.asList(w.getLoadedChunks()));
         }

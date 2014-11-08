@@ -11,9 +11,7 @@ public class Reflection {
     public static Object newFromNMS(String nms) {
         try {
             return nmsClass(nms).newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
@@ -21,9 +19,7 @@ public class Reflection {
     public static Object newFromOBC(String obc) {
         try {
             return obcClass(obc).newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
@@ -93,9 +89,7 @@ public class Reflection {
                 Object connection = Reflection.getField(craftPlayer.getClass(), "playerConnection").get(craftPlayer);
                 Reflection.getMethod(connection.getClass(), "sendPacket").invoke(connection, packet);
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

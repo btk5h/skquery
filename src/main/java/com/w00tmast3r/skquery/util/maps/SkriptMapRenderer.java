@@ -15,8 +15,8 @@ import java.util.UUID;
 
 public class SkriptMapRenderer extends MapRenderer implements Listener {
 
-    private final ArrayList<UUID> dirtyPlayers = new ArrayList<UUID>();
-    private ArrayList<RenderTask> tasks = new ArrayList<RenderTask>();
+    private final ArrayList<UUID> dirtyPlayers = new ArrayList<>();
+    private ArrayList<RenderTask> tasks = new ArrayList<>();
 
     public SkriptMapRenderer() {
         super(false);
@@ -39,7 +39,7 @@ public class SkriptMapRenderer extends MapRenderer implements Listener {
     }
 
     public void clearTasks() {
-        tasks = new ArrayList<RenderTask>();
+        tasks = new ArrayList<>();
         redraw();
     }
 

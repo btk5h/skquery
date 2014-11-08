@@ -14,16 +14,16 @@ public class EnumClassInfo<E extends Enum<E>> {
     private final Class<E> enumType;
     private final String codeName;
     private final ClassInfo<E> classInfo;
-    private final HashMap<String, String> synonyms = new HashMap<String, String>();
+    private final HashMap<String, String> synonyms = new HashMap<>();
 
     private EnumClassInfo(Class<E> enumType, String codeName) {
         this.enumType = enumType;
         this.codeName = codeName;
-        classInfo = new ClassInfo<E>(enumType, codeName);
+        classInfo = new ClassInfo<>(enumType, codeName);
     }
 
     public static <E extends Enum<E>> EnumClassInfo<E> create(Class<E> enumType, String codeName) {
-        return new EnumClassInfo<E>(enumType, codeName);
+        return new EnumClassInfo<>(enumType, codeName);
     }
 
     public EnumClassInfo<E> addSynonym(String regex, String actualValue) {
@@ -77,6 +77,6 @@ public class EnumClassInfo<E extends Enum<E>> {
                         return codeName + ":.+";
                     }
                 })
-                .serializer(new EnumSerializer<E>(enumType)));
+                .serializer(new EnumSerializer<>(enumType)));
     }
 }

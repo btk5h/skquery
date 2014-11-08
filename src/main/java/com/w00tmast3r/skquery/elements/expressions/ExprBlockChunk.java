@@ -25,8 +25,8 @@ public class ExprBlockChunk extends SimpleExpression<Block> {
     protected Block[] get(Event event) {
         Chunk c = chunk.getSingle(event);
         if(c == null) return null;
-        List<Block> list = new ArrayList<Block>();
-        for(Block b : new IteratorIterable<Block>(iterator(event))){
+        List<Block> list = new ArrayList<>();
+        for(Block b : new IteratorIterable<>(iterator(event))){
             list.add(b);
         }
         return list.toArray(new Block[list.size()]);
@@ -61,7 +61,7 @@ public class ExprBlockChunk extends SimpleExpression<Block> {
     @Override
     public Iterator<Block> iterator(Event e) {
         Chunk c = chunk.getSingle(e);
-        if(c == null) return new EmptyIterator<Block>();
+        if(c == null) return new EmptyIterator<>();
         return new CuboidIterator(c);
     }
 }

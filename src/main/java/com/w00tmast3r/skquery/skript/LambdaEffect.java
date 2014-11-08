@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class LambdaEffect {
 
-    private final ArrayList<Effect> chain = new ArrayList<Effect>();
+    private final ArrayList<Effect> chain = new ArrayList<>();
     private final boolean isVoid;
 
     public LambdaEffect(boolean isVoid) {
@@ -26,7 +26,7 @@ public class LambdaEffect {
     }
 
     public Collection<Effect> getChain() {
-        if (isVoid) return new ArrayList<Effect>();
+        if (isVoid) return new ArrayList<>();
         return chain;
     }
 

@@ -23,7 +23,7 @@ public class ExprEntities extends SimpleExpression<Entity> {
 
     @Override
     protected Entity[] get(Event event) {
-        ArrayList<Entity> entities = new ArrayList<Entity>();
+        ArrayList<Entity> entities = new ArrayList<>();
         for (Chunk c : chunk.getAll(event)) {
             entities.addAll(Arrays.asList(c.getEntities()));
         }

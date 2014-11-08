@@ -24,7 +24,7 @@ public class ExprRegexMatches extends SimpleExpression<String> {
         String t = text.getSingle(e);
         String r = regex.getSingle(e);
         if (g == null || t == null || r == null) return null;
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<String> results = new ArrayList<>();
         int groupId = g.intValue();
         Pattern pattern = Pattern.compile(r);
         Matcher matcher = pattern.matcher(t);

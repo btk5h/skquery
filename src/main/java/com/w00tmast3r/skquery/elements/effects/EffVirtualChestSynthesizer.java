@@ -75,7 +75,7 @@ public class EffVirtualChestSynthesizer extends Effect implements Listener {
                             stackMeta.setDisplayName(invStr[i]);
                             stack.setItemMeta(stackMeta);
                         } else if(currentOperation.equalsIgnoreCase("c")){ // command reassignment
-                            if(commands[node] == null) commands[node] = new ArrayList<String>();
+                            if(commands[node] == null) commands[node] = new ArrayList<>();
                             commands[node].add(invStr[i]);
                             //commands[node] = invStr[i];
                         } else {

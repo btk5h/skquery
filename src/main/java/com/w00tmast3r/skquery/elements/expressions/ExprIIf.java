@@ -10,10 +10,9 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.Utils;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
-
-import java.lang.reflect.Array;
 
 @Patterns({"%boolean%[ ]?[ ]%object%[ ]:[ ]%object%"})
 public class ExprIIf extends SimpleExpression<Object> {
@@ -23,7 +22,7 @@ public class ExprIIf extends SimpleExpression<Object> {
     private Class<?> returnType = Object.class;
 
     protected Object[] get(Event e) {
-        Object[] array = (Object[]) Array.newInstance(returnType, 1);
+        Object[] array = Collect.newArray(returnType, 1);
         if (Boolean.TRUE.equals(op.getSingle(e)))  array[0] = truePart.getSingle(e);
         else array[0] = falsePart.getSingle(e);
         return array;

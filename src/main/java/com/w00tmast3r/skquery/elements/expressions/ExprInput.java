@@ -7,22 +7,22 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 
 @Patterns("%*classinfo% input")
 public class ExprInput extends SimpleExpression<Object> {
 
-    private static HashMap<Event, Object> in = new HashMap<Event, Object>();
+    private static HashMap<Event, Object> in = new HashMap<>();
     private Class<?> returnType = Object.class;
 
     @Override
     protected Object[] get(Event e) {
         if (!in.containsKey(e)) return null;
-        Object[] array = (Object[]) Array.newInstance(returnType, 1);
+        Object[] array = Collect.newArray(returnType, 1);
         array[0] = in.get(e);
         return array;
     }

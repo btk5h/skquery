@@ -23,6 +23,7 @@ public class ExprSQLQuery extends SimpleExpression<CachedRowSetImpl> {
 
     private File executor;
     private Expression<String> query;
+    private String pool;
 
     @Override
     protected CachedRowSetImpl[] get(Event event) {
@@ -30,7 +31,7 @@ public class ExprSQLQuery extends SimpleExpression<CachedRowSetImpl> {
         if (q == null) return null;
         Statement st = null;
         try {
-            st = ScriptCredentials.get(executor).getConnection().createStatement();
+            st = ScriptCredentials.get(executor, pool).getConnection(pool).createStatement();
             CachedRowSetImpl out = new CachedRowSetImpl();
             out.populate(st.executeQuery(q));
             return Collect.asArray(out);
@@ -69,6 +70,8 @@ public class ExprSQLQuery extends SimpleExpression<CachedRowSetImpl> {
         }
         executor = ScriptLoader.currentScript.getFile();
         query = (Expression<String>) expressions[0];
+        pool = ScriptCredentials.currentPool;
+        ScriptCredentials.currentPool = "default";
         return true;
     }
 }

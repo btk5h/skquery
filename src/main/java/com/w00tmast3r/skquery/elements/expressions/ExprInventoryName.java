@@ -49,7 +49,7 @@ public class ExprInventoryName extends SimplePropertyExpression<Inventory, Strin
         if (i.getType() == InventoryType.CHEST) {
             copy = Bukkit.createInventory(i.getHolder(), i.getSize(), s);
         } else return;
-        for (HumanEntity h : new ArrayList<HumanEntity>(i.getViewers())) {
+        for (HumanEntity h : new ArrayList<>(i.getViewers())) {
             if (h instanceof Player) FormattedSlotManager.exemptNextClose((Player) h);
             h.openInventory(copy);
         }

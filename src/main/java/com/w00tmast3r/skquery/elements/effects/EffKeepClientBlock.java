@@ -12,7 +12,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import com.w00tmast3r.skquery.SkQuery;
 import com.w00tmast3r.skquery.api.*;
-import com.w00tmast3r.skquery.util.ValuePair;
+import com.w00tmast3r.skquery.util.BiValue;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -50,9 +50,9 @@ public class EffKeepClientBlock extends Effect {
                 for (Block b : block.getAll(event)) {
                     p.sendBlockChange(b.getLocation(), mat, (byte) m.getRandom().getDurability());
                     if (!PacketListeners.clientRenders.containsKey(b.getLocation())) {
-                        PacketListeners.clientRenders.put(b.getLocation(), new HashMap<UUID, ValuePair<Material, Integer>>());
+                        PacketListeners.clientRenders.put(b.getLocation(), new HashMap<UUID, BiValue<Material, Integer>>());
                     }
-                    PacketListeners.clientRenders.get(b.getLocation()).put(p.getUniqueId(), new ValuePair<Material, Integer>(mat, (int) m.getRandom().getDurability()));
+                    PacketListeners.clientRenders.get(b.getLocation()).put(p.getUniqueId(), new BiValue<>(mat, (int) m.getRandom().getDurability()));
                 }
             }
         } else if (pattern == 1) {
@@ -66,7 +66,7 @@ public class EffKeepClientBlock extends Effect {
                 }
             }
         } else {
-            PacketListeners.clientRenders = new HashMap<Location, HashMap<UUID, ValuePair<Material, Integer>>>();
+            PacketListeners.clientRenders = new HashMap<>();
         }
     }
 
@@ -92,7 +92,7 @@ public class EffKeepClientBlock extends Effect {
     public static class PacketListeners implements Listener {
 
         private static boolean hasInitialized = false;
-        private static HashMap<Location, HashMap<UUID, ValuePair<Material, Integer>>> clientRenders = new HashMap<Location, HashMap<UUID, ValuePair<Material, Integer>>>();
+        private static HashMap<Location, HashMap<UUID, BiValue<Material, Integer>>> clientRenders = new HashMap<>();
 
         static {
             if (!hasInitialized) {
@@ -103,8 +103,8 @@ public class EffKeepClientBlock extends Effect {
                         Player p = event.getPlayer();
                         Location l = new Location(p.getWorld(), ints.read(0), ints.read(1), ints.read(2));
                         if (clientRenders.containsKey(l) && clientRenders.get(l).containsKey(p.getUniqueId())) {
-                            event.getPacket().getBlocks().write(0, clientRenders.get(l).get(p.getUniqueId()).getFirstValue());
-                            ints.write(3, clientRenders.get(l).get(p.getUniqueId()).getSecondValue());
+                            event.getPacket().getBlocks().write(0, clientRenders.get(l).get(p.getUniqueId()).getFirst());
+                            ints.write(3, clientRenders.get(l).get(p.getUniqueId()).getSecond());
                         }
                     }
                 });

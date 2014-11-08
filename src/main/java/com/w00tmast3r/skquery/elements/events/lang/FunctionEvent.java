@@ -30,7 +30,7 @@ public class FunctionEvent extends Event implements MethodEvent {
     }
 
     @Override
-    public String getCause() {
+    public String getMatch() {
         return cause;
     }
 

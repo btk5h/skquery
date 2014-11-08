@@ -5,10 +5,9 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
-
-import java.lang.reflect.Array;
 
 @Patterns("index %number% of %objects%")
 public class ExprArrayValue extends SimpleExpression<Object> {
@@ -19,7 +18,7 @@ public class ExprArrayValue extends SimpleExpression<Object> {
 
     @Override
     protected Object[] get(Event e) {
-        Object[] array = (Object[]) Array.newInstance(returnType, 1);
+        Object[] array = Collect.newArray(returnType, 1);
         Number n = index.getSingle(e);
         if (n == null) return null;
         int index = n.intValue();

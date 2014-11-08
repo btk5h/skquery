@@ -30,7 +30,7 @@ public class ExprPlayerPermissions extends SimpleExpression<String> {
     protected String[] get(Event event) {
         Player p = player.getSingle(event);
         if (p == null) return null;
-        ArrayList<String> permissions = new ArrayList<String>();
+        ArrayList<String> permissions = new ArrayList<>();
         for (Map.Entry<String, Boolean> perm : PermissionsHandler.getPermissions(p).getPermissions().entrySet()) {
             if (perm.getValue()) permissions.add(perm.getKey());
         }

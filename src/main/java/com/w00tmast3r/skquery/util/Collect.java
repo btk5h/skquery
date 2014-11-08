@@ -1,6 +1,11 @@
 package com.w00tmast3r.skquery.util;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class Collect {
@@ -16,8 +21,13 @@ public class Collect {
         return strings;
     }
 
+    @SafeVarargs
     public static <T> T[] asArray(T... objects) {
         return objects;
+    }
+
+    public static <T> T[] newArray(Class<?> type, int size) {
+        return (T[]) Array.newInstance(type, size);
     }
 
     public static String[] asSkriptProperty(String property, String fromType) {
@@ -49,13 +59,35 @@ public class Collect {
         }
     }
 
+    public static String getPaths(Collection<String> list) {
+        StringBuilder builder = new StringBuilder();
+        for (String s : list) {
+            builder.append(s).append(".");
+        }
+        return builder.toString().substring(0, builder.length() - 1);
+    }
+
     public static String textPart(InputStream is) {
         if (is == null) return "";
-        Scanner s = new Scanner(is).useDelimiter("\\A");
-        try {
+        try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
             return s.hasNext() ? s.next() : "";
-        } finally {
-            s.close();
         }
+    }
+
+    private static ArrayList<File> getListFiles(File root, FilenameFilter filter, ArrayList<File> toAdd) {
+        for (File f : root.listFiles(filter)) {
+            if (f.isDirectory()) return getListFiles(f, filter, toAdd);
+            else toAdd.add(f);
+        }
+        return toAdd;
+    }
+
+    public static File[] getFiles(File root, FilenameFilter filter) {
+        ArrayList<File> files = getListFiles(root, filter, new ArrayList<File>());
+        return files.toArray(new File[files.size()]);
+    }
+
+    public static File[] getFiles(File root) {
+        return getFiles(root, null);
     }
 }

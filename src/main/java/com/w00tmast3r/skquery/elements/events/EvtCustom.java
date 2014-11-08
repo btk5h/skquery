@@ -23,7 +23,7 @@ public class EvtCustom extends SkriptEvent {
         return event instanceof MethodEvent && s.check(event, new Checker<String>() {
             @Override
             public boolean check(String s) {
-                return ((MethodEvent) event).getCause().equalsIgnoreCase(s);
+                return ((MethodEvent) event).getMatch().equalsIgnoreCase(s);
             }
         });
     }

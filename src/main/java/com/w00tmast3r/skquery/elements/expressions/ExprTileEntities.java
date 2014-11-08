@@ -23,7 +23,7 @@ public class ExprTileEntities extends SimpleExpression<Block> {
 
     @Override
     protected Block[] get(Event event) {
-        ArrayList<Block> list = new ArrayList<Block>();
+        ArrayList<Block> list = new ArrayList<>();
         for (Chunk c : chunk.getAll(event)) {
             for (BlockState b : c.getTileEntities()) {
                 list.add(b.getBlock());

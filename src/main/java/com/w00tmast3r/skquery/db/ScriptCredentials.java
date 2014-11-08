@@ -8,11 +8,12 @@ import java.util.HashMap;
 
 public class ScriptCredentials {
 
-    private static HashMap<File, ScriptCredentials> credentials = new HashMap<File, ScriptCredentials>();
+    public static String currentPool = "default";
+    private static HashMap<File, ScriptCredentials> credentials = new HashMap<>();
     private String url = null;
     private String username = null;
     private String password = null;
-    private Connection connection = null;
+    private HashMap<String, Connection> connection = null;
 
     private ScriptCredentials() {
 
@@ -37,15 +38,23 @@ public class ScriptCredentials {
     }
 
     public Connection getConnection() {
-        return connection;
+        return getConnection("default");
+    }
+
+    public Connection getConnection(String pool) {
+        return connection.get(pool);
     }
 
     public static ScriptCredentials get(File script) {
+        return get(script, "default");
+    }
+
+    public static ScriptCredentials get(File script, String pool) {
         if (!credentials.containsKey(script)) credentials.put(script, new ScriptCredentials());
         ScriptCredentials c = credentials.get(script);
         try {
-            if (c.connection != null && !c.connection.isValid(1)) {
-                 c.validate();
+            if (c.connection != null && !c.connection.containsKey(pool) && !c.connection.get(pool).isValid(1)) {
+                 c.validate(pool);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +65,9 @@ public class ScriptCredentials {
     public static void clear() {
         for (ScriptCredentials sc : credentials.values()) {
             if (sc.connection != null) try {
-                sc.connection.close();
+                for (Connection connection : sc.connection.values()) {
+                    connection.close();
+                }
             } catch (SQLException ignored) {
 
             }
@@ -65,8 +76,15 @@ public class ScriptCredentials {
 
     private void validate() {
         if (url != null && username != null && password != null) {
+            connection = new HashMap<>();
+            validate("default");
+        }
+    }
+
+    private void validate(String pool) {
+        if (url != null && username != null && password != null) {
             try {
-                connection = DriverManager.getConnection(url, username, password);
+                connection.put(pool, DriverManager.getConnection(url, username, password));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

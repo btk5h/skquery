@@ -41,7 +41,7 @@ public class Types extends AbstractTask {
 
     @Override
     public void run() {
-        Classes.registerClass(new ClassInfo<BufferedImage>(BufferedImage.class, "image")
+        Classes.registerClass(new ClassInfo<>(BufferedImage.class, "image")
                 .parser(new Parser<BufferedImage>() {
                     @Override
                     public BufferedImage parse(String s, ParseContext parseContext) {
@@ -108,7 +108,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<JSONMessage>(JSONMessage.class, "jsonmessage")
+        Classes.registerClass(new ClassInfo<>(JSONMessage.class, "jsonmessage")
                 .parser(new Parser<JSONMessage>() {
                     @Override
                     public JSONMessage parse(String s, ParseContext parseContext) {
@@ -136,7 +136,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<FireworkEffect>(FireworkEffect.class, "fireworkeffect")
+        Classes.registerClass(new ClassInfo<>(FireworkEffect.class, "fireworkeffect")
                 .parser(new Parser<FireworkEffect>() {
                     @Override
                     public FireworkEffect parse(String s, ParseContext parseContext) {
@@ -164,7 +164,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<ParticleType>(ParticleType.class, "particletype")
+        Classes.registerClass(new ClassInfo<>(ParticleType.class, "particletype")
                 .after("string")
                 .before("particletypes")
                 .parser(new Parser<ParticleType>() {
@@ -211,7 +211,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<Particle>(Particle.class, "particle")
+        Classes.registerClass(new ClassInfo<>(Particle.class, "particle")
                 .parser(new Parser<Particle>() {
                     @Override
                     public Particle parse(String s, ParseContext parseContext) {
@@ -239,7 +239,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<Markup>(Markup.class, "markup")
+        Classes.registerClass(new ClassInfo<>(Markup.class, "markup")
                 .parser(new Parser<Markup>() {
                     @Override
                     public Markup parse(String s, ParseContext parseContext) {
@@ -299,7 +299,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<CachedRowSetImpl>(CachedRowSetImpl.class, "queryresult")
+        Classes.registerClass(new ClassInfo<>(CachedRowSetImpl.class, "queryresult")
                 .parser(new Parser<CachedRowSetImpl>() {
                     @Override
                     public CachedRowSetImpl parse(String s, ParseContext parseContext) {
@@ -411,7 +411,7 @@ public class Types extends AbstractTask {
                 }));
         */
 
-        Classes.registerClass(new ClassInfo<LambdaCondition>(LambdaCondition.class, "predicate")
+        Classes.registerClass(new ClassInfo<>(LambdaCondition.class, "predicate")
                 .parser(new Parser<LambdaCondition>() {
                     @Override
                     public LambdaCondition parse(String s, ParseContext parseContext) {
@@ -447,7 +447,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<LambdaEffect>(LambdaEffect.class, "lambda")
+        Classes.registerClass(new ClassInfo<>(LambdaEffect.class, "lambda")
                 .parser(new Parser<LambdaEffect>() {
                     @Override
                     public LambdaEffect parse(String s, ParseContext parseContext) {
@@ -484,7 +484,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<Color>(Color.class, "rgbcolor")
+        Classes.registerClass(new ClassInfo<>(Color.class, "rgbcolor")
                 .parser(new Parser<Color>() {
                     @Override
                     public Color parse(final String s, final ParseContext context) {
@@ -545,7 +545,7 @@ public class Types extends AbstractTask {
                     }
                 }));
 
-        Classes.registerClass(new ClassInfo<Dynamic>(Dynamic.class, "dynamic")
+        Classes.registerClass(new ClassInfo<>(Dynamic.class, "dynamic")
                 .parser(new Parser<Dynamic>() {
                     @Override
                     public Dynamic parse(final String s, final ParseContext context) {

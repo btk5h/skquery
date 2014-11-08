@@ -30,7 +30,7 @@ public class ExprSQLQueryObjects extends SimpleExpression<Object> {
             String c = column.getSingle(event);
             if (q == null || c == null) return null;
             q = q.createCopy();
-            ArrayList<Object> output = new ArrayList<Object>();
+            ArrayList<Object> output = new ArrayList<>();
             while (q.next()) {
                 output.add(q.getObject(c));
             }

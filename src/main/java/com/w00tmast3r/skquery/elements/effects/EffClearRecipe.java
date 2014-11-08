@@ -30,11 +30,7 @@ public class EffClearRecipe extends Effect {
                 Object craftingInstance = Reflection.nmsClass("CraftingManager").getMethod("getInstance").invoke(null);
                 Object recipes = Reflection.getField(craftingInstance.getClass(), "recipes").get(craftingInstance);
                 Reflection.getMethod(recipes.getClass(), "remove").invoke(recipes, type.getRandom().getType().getId());
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }

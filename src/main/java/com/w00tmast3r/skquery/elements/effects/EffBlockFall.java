@@ -44,11 +44,7 @@ public class EffBlockFall extends Effect {
                     try {
                         Object craftSand = Reflection.obcClass("entity.CraftFallingSand").getMethod("getHandle").invoke(block);
                         craftSand.getClass().getMethod("a", boolean.class).invoke(craftSand, true);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
+                    } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
                 }

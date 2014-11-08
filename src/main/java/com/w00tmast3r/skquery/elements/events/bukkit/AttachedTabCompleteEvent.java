@@ -15,7 +15,7 @@ public class AttachedTabCompleteEvent extends Event implements Cancellable {
     private final CommandSender sender;
     private final Command command;
     private final String[] args;
-    private List<String> result = new ArrayList<String>();
+    private List<String> result = new ArrayList<>();
     private boolean isCancelled = false;
 
     public AttachedTabCompleteEvent(CommandSender sender, Command command, String[] args) {

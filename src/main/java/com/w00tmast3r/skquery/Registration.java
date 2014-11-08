@@ -44,9 +44,9 @@ public class Registration {
             PluginDescriptionFile desc = SkQuery.getInstance().getPluginLoader().getPluginDescription(src);
             Bukkit.getLogger().info("[skQuery] Locating classes from " + desc.getName() + "...");
             try {
-                ArrayList<Class> classes = new ArrayList<Class>();
+                ArrayList<Class> classes = new ArrayList<>();
                 JarFile jar = new JarFile(src);
-                for (JarEntry e : new IterableEnumeration<JarEntry>(jar.entries())) {
+                for (JarEntry e : new IterableEnumeration<>(jar.entries())) {
                     if (e.getName().endsWith(".class")) {
                         String className = e.getName().replace('/', '.').substring(0, e.getName().length() - 6);
                         try {
@@ -60,8 +60,8 @@ public class Registration {
                             }
                         } catch (ClassNotFoundException error) {
                             error.printStackTrace();
-                        } catch (NoClassDefFoundError ignored) {
-                        } catch (ExceptionInInitializerError ignored) {}
+                        } catch (NoClassDefFoundError | ExceptionInInitializerError ignored) {
+                        }
                     }
                 }
                 Bukkit.getLogger().info("[skQuery] Finished snooping of " + desc.getName() + " with " + classes.size() + " classes.");

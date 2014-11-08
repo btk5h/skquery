@@ -58,24 +58,34 @@ public class Particle {
             for (Field field : packet.getClass().getDeclaredFields()){
                 field.setAccessible(true);
                 String fieldName = field.getName();
-                if (fieldName.equals("a")) {
-                    field.set(packet, particle);
-                } else if (fieldName.equals("b")) {
-                    field.setFloat(packet, (float) loc.getX());
-                } else if (fieldName.equals("c")) {
-                    field.setFloat(packet, (float) loc.getY());
-                } else if (fieldName.equals("d")) {
-                    field.setFloat(packet, (float) loc.getZ());
-                } else if (fieldName.equals("e")) {
-                    field.setFloat(packet, xO);
-                } else if (fieldName.equals("f")) {
-                    field.setFloat(packet, yO);
-                } else if (fieldName.equals("g")) {
-                    field.setFloat(packet, zO);
-                } else if (fieldName.equals("h")) {
-                    field.setFloat(packet, data);
-                } else if (fieldName.equals("i")) {
-                    field.setInt(packet, amount);
+                switch (fieldName) {
+                    case "a":
+                        field.set(packet, particle);
+                        break;
+                    case "b":
+                        field.setFloat(packet, (float) loc.getX());
+                        break;
+                    case "c":
+                        field.setFloat(packet, (float) loc.getY());
+                        break;
+                    case "d":
+                        field.setFloat(packet, (float) loc.getZ());
+                        break;
+                    case "e":
+                        field.setFloat(packet, xO);
+                        break;
+                    case "f":
+                        field.setFloat(packet, yO);
+                        break;
+                    case "g":
+                        field.setFloat(packet, zO);
+                        break;
+                    case "h":
+                        field.setFloat(packet, data);
+                        break;
+                    case "i":
+                        field.setInt(packet, amount);
+                        break;
                 }
             }
             Reflection.sendPacket(packet, players == null ? Bukkit.getOnlinePlayers() : players);

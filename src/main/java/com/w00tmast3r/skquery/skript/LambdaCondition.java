@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class LambdaCondition {
 
-    private final ArrayList<Condition> chain = new ArrayList<Condition>();
+    private final ArrayList<Condition> chain = new ArrayList<>();
 
     public LambdaCondition(Condition e) {
         if (e != null) chain.add(e);

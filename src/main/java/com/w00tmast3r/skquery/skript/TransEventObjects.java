@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class TransEventObjects {
 
-    private static HashMap<Event, Object> limbo = new HashMap<Event, Object>();
+    private static HashMap<Event, Object> limbo = new HashMap<>();
 
     public static void store(Event key, Object value) {
         limbo.put(key, value);

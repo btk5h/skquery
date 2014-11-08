@@ -117,8 +117,8 @@ public class PlayerDisplayChanger {
             JSONObject json = (JSONObject) new JSONParser().parse(profileCache.get(skinOwner));
             JSONArray properties = (JSONArray) json.get("properties");
 
-            for (int i = 0; i < properties.size(); i++) {
-                JSONObject property = (JSONObject) properties.get(i);
+            for (Object property1 : properties) {
+                JSONObject property = (JSONObject) property1;
                 String name = (String) property.get("name");
                 String value = (String) property.get("value");
                 String signature = (String) property.get("signature"); // May be NULL

@@ -17,7 +17,7 @@ import java.util.UUID;
 public class PermissionsHandler implements Listener {
 
     private static boolean enabled = false;
-    private static HashMap<UUID, PermissionAttachment> permissions = new HashMap<UUID, PermissionAttachment>();
+    private static HashMap<UUID, PermissionAttachment> permissions = new HashMap<>();
 
     public static void enable() {
         if (!enabled) {

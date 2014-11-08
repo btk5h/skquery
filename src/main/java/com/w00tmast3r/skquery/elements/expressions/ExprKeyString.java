@@ -54,11 +54,11 @@ public class ExprKeyString extends SimpleExpression<String> {
     }
 
     public static String getKey(int length, String charset) {
-        ArrayList<ArrayList<Integer>> charranges = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> charranges = new ArrayList<>();
         Pattern regex = Pattern.compile("(.)-(.)");
         Matcher m = regex.matcher(charset);
         while (m.find()) {
-            ArrayList<Integer> range = new ArrayList<Integer>();
+            ArrayList<Integer> range = new ArrayList<>();
             int first = m.group(1).charAt(0);
             int second = m.group(2).charAt(0);
             range.add(Math.min(first, second));

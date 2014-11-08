@@ -22,7 +22,7 @@ public class DynamicEnumTypes {
             for (File file : dir.listFiles()) {
                 if (file != null && !file.isDirectory() && file.getName().substring(file.getName().lastIndexOf('.') + 1).equalsIgnoreCase("skt") ) {
                     Class c = Class.forName("com.w00tmast3r.skquery.skript.DummyClasses$_" + current++);
-                    ArrayList<String> patterns = new ArrayList<String>();
+                    ArrayList<String> patterns = new ArrayList<>();
                     BufferedReader reader = new BufferedReader(new FileReader(file));
                     String typeName = null;
                     String line;
@@ -37,15 +37,13 @@ public class DynamicEnumTypes {
                     add(c, typeName, patterns);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private static <T extends DummyClasses.DummyBase> void add(final Class<T> c, final String typeName, final ArrayList<String> patterns) {
-        Classes.registerClass(new ClassInfo<T>(c, typeName)
+        Classes.registerClass(new ClassInfo<>(c, typeName)
                 .user(typeName + "s?")
                 .parser(new Parser<T>() {
                     @Override
@@ -58,9 +56,7 @@ public class DynamicEnumTypes {
                             T instance = c.newInstance();
                             instance.setValue(s.toLowerCase());
                             return instance;
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
+                        } catch (InstantiationException | IllegalAccessException e) {
                             e.printStackTrace();
                         }
                         return null;
@@ -101,9 +97,7 @@ public class DynamicEnumTypes {
                             T instance = c.newInstance();
                             instance.setValue((String) fields.getObject("name"));
                             return instance;
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
+                        } catch (InstantiationException | IllegalAccessException e) {
                             e.printStackTrace();
                         }
                         return null;

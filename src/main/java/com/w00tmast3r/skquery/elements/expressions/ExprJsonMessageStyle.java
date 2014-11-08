@@ -24,7 +24,7 @@ public class ExprJsonMessageStyle extends SimpleExpression<JSONMessage> {
     protected JSONMessage[] get(Event event) {
         JSONMessage j = json.getSingle(event);
         if (j == null) return null;
-        ArrayList<ChatColor> styles = new ArrayList<ChatColor>();
+        ArrayList<ChatColor> styles = new ArrayList<>();
         for (Color a : append.getAll(event)) {
             switch (a.asChatColor()) {
                 case BLACK:

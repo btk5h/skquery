@@ -28,7 +28,7 @@ public class RoutineEvent extends Event implements MethodEvent {
     }
 
     @Override
-    public String getCause() {
+    public String getMatch() {
         return cause;
     }
 

@@ -19,15 +19,15 @@ import java.util.UUID;
 
 public class FormattedSlotManager implements Listener {
 
-    private static final HashMap<UUID, BiValue<HashMap<Integer, SlotRule>, Event>> playerRules = new HashMap<UUID, BiValue<HashMap<Integer, SlotRule>, Event>>();
-    private static final List<UUID> exempt = new ArrayList<UUID>();
+    private static final HashMap<UUID, BiValue<HashMap<Integer, SlotRule>, Event>> playerRules = new HashMap<>();
+    private static final List<UUID> exempt = new ArrayList<>();
 
     public static HashMap<Integer, SlotRule> getRules(Player p) {
         return playerRules.containsKey(p.getUniqueId()) ? playerRules.get(p.getUniqueId()).getFirst() : new HashMap<Integer, SlotRule>();
     }
 
     public static void setRules(Event e, Player p, HashMap<Integer, SlotRule> slotRules) {
-        playerRules.put(p.getUniqueId(), new BiValue<HashMap<Integer, SlotRule>, Event>(slotRules, e));
+        playerRules.put(p.getUniqueId(), new BiValue<>(slotRules, e));
     }
 
     public static void exemptNextClose(Player p) {

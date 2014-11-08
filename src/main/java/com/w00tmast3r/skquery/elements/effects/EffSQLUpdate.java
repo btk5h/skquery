@@ -21,6 +21,7 @@ public class EffSQLUpdate extends Effect {
 
     private File executor;
     private Expression<String> query;
+    private String pool;
 
     @Override
     protected void execute(Event event) {
@@ -28,7 +29,7 @@ public class EffSQLUpdate extends Effect {
         if (q == null) return;
         Statement st = null;
         try {
-            st = ScriptCredentials.get(executor).getConnection().createStatement();
+            st = ScriptCredentials.get(executor, pool).getConnection(pool).createStatement();
             st.executeUpdate(q);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,6 +55,8 @@ public class EffSQLUpdate extends Effect {
         }
         executor = ScriptLoader.currentScript.getFile();
         query = (Expression<String>) expressions[0];
+        pool = ScriptCredentials.currentPool;
+        ScriptCredentials.currentPool = "default";
         return true;
     }
 }

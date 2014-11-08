@@ -8,10 +8,10 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.util.Kleenean;
 import com.w00tmast3r.skquery.api.Patterns;
 import com.w00tmast3r.skquery.skript.LambdaCondition;
+import com.w00tmast3r.skquery.util.Collect;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Patterns("%objects% where %predicate%")
@@ -23,7 +23,7 @@ public class ExprWhere extends SimpleExpression<Object> {
 
     @Override
     protected Object[] get(Event e) {
-        ArrayList<Object> out = new ArrayList<Object>();
+        ArrayList<Object> out = new ArrayList<>();
         LambdaCondition l = lambda.getSingle(e);
         if (l == null) return null;
         for (Object o : objects.getAll(e)) {
@@ -33,7 +33,7 @@ public class ExprWhere extends SimpleExpression<Object> {
             }
             ExprInput.removeInput(e);
         }
-        Object[] array = (Object[]) Array.newInstance(returnType.getC(), out.size());
+        Object[] array = Collect.newArray(returnType.getC(), out.size());
         return out.toArray(array);
     }
 

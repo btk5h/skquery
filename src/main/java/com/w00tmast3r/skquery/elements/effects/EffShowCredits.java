@@ -26,13 +26,7 @@ public class EffShowCredits extends Effect {
             Constructor packetConstructor = Reflection.nmsClass("PacketPlayOutGameStateChange").getConstructor(int.class, int.class);
             Object packet = packetConstructor.newInstance(4, 0);
             Reflection.sendPacket(packet, p);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

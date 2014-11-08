@@ -32,7 +32,7 @@ public class EffMIDI extends Effect {
         String m = midi.getSingle(event);
         if(m == null) return;
         File f = new File(Skript.getInstance().getDataFolder().getAbsolutePath() + File.separator + Skript.SCRIPTSFOLDER + File.separator + m + ".mid");
-        HashSet<Player> pList = new HashSet<Player>();
+        HashSet<Player> pList = new HashSet<>();
         if (f.exists()) {
             Collections.addAll(pList, players.getAll(event));
             MidiUtil.playMidiQuietly(f, pList);

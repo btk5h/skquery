@@ -26,8 +26,8 @@ public class ExprBlockCube extends SimpleExpression<Block> {
         Location p1 = pos1.getSingle(event);
         Location p2 = pos2.getSingle(event);
         if(p1 == null || p2 == null) return null;
-        List<Block> list = new ArrayList<Block>();
-        for(Block b : new IteratorIterable<Block>(iterator(event))){
+        List<Block> list = new ArrayList<>();
+        for(Block b : new IteratorIterable<>(iterator(event))){
             list.add(b);
         }
         return list.toArray(new Block[list.size()]);
@@ -64,7 +64,7 @@ public class ExprBlockCube extends SimpleExpression<Block> {
     public Iterator<Block> iterator(Event e) {
         Location p1 = pos1.getSingle(e);
         Location p2 = pos2.getSingle(e);
-        if(p1 == null || p2 == null) return new EmptyIterator<Block>();
+        if(p1 == null || p2 == null) return new EmptyIterator<>();
         return new CuboidIterator(p1, p2);
     }
 }

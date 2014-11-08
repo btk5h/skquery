@@ -4,9 +4,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.w00tmast3r.skquery.api.AbstractTask;
 import com.w00tmast3r.skquery.elements.events.bukkit.AttachedTabCompleteEvent;
-import com.w00tmast3r.skquery.elements.events.lang.FunctionEvent;
-import com.w00tmast3r.skquery.elements.events.lang.RoutineEvent;
-import com.w00tmast3r.skquery.elements.events.lang.ScriptOptionsEvent;
+import com.w00tmast3r.skquery.elements.events.lang.*;
 import com.w00tmast3r.skquery.util.custom.projectile.ItemProjectileHitEvent;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -158,5 +156,11 @@ public class EventRegistry extends AbstractTask {
                 return attachedTabCompleteEvent.getSender() instanceof Player ? ((Player) attachedTabCompleteEvent.getSender()) : null;
             }
         }, 0);
+
+        registerEvent("*Custom Effect Logic", EvtCustomEffects.class, CustomEffectEvent.class, "custom effect [logic [for]] %string%");
+
+        registerEvent("*Custom Expression Logic", EvtCustomExpressions.class, CustomExpressionEvent.class, "custom expression [logic [for]] %string%");
+
+        registerEvent("*Custom Property Logic", EvtCustomProperties.class, CustomPropertyExpressionEvent.class, "custom property [logic [for]] %string% of %string%");
     }
 }

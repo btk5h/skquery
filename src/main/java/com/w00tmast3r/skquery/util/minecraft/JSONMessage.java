@@ -28,7 +28,7 @@ public class JSONMessage {
     private Class<?> obcItemStack = Reflection.obcClass("inventory.CraftItemStack");
 
     public JSONMessage(final String firstPartText) {
-        messageParts = new ArrayList<MessagePart>();
+        messageParts = new ArrayList<>();
         messageParts.add(new MessagePart(firstPartText));
         jsonString = null;
         dirty = false;

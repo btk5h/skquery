@@ -75,7 +75,7 @@ public class BossBars implements Listener {
         removeStatusBar(event.getPlayer());
     }
 
-    private static PlayerMap<FakeDragon> DRAGONS = new PlayerMap<FakeDragon>();
+    private static PlayerMap<FakeDragon> DRAGONS = new PlayerMap<>();
 
     /**
      * Checks to see if the player is currently being displayed a status bar via fake Ender Dragon.
@@ -305,7 +305,7 @@ public class BossBars implements Listener {
         private final Map<String, V> contents;
 
         public PlayerMap(){
-            contents = new HashMap<String, V>();
+            contents = new HashMap<>();
             defaultValue = null;
         }
 
@@ -325,7 +325,7 @@ public class BossBars implements Listener {
 
         @Nonnull
         public Set<Entry<Player, V>> entrySet() {
-            Set<Entry<Player, V>> toReturn = new HashSet<Entry<Player, V>>();
+            Set<Entry<Player, V>> toReturn = new HashSet<>();
             for(String name : contents.keySet())
                 toReturn.add(new PlayerEntry(Bukkit.getPlayer(name), contents.get(name)));
             return toReturn;
@@ -346,7 +346,7 @@ public class BossBars implements Listener {
 
         @Nonnull
         public Set<Player> keySet(){
-            Set<Player> toReturn = new HashSet<Player>();
+            Set<Player> toReturn = new HashSet<>();
             for(String name : contents.keySet())
                 toReturn.add(Bukkit.getPlayer(name));
             return toReturn;

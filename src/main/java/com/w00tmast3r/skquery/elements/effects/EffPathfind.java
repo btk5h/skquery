@@ -37,11 +37,7 @@ public class EffPathfind extends Effect {
                 Object entityInsentient = Reflection.obcClass("entity.CraftLivingEntity").getMethod("getHandle").invoke(e);
                 Object navigation = Reflection.nmsClass("EntityInsentient").getMethod("getNavigation").invoke(entityInsentient);
                 navigation.getClass().getMethod("a", double.class, double.class, double.class, double.class).invoke(navigation, l.getX(), l.getY(), l.getZ(), s.doubleValue());
-            } catch (IllegalAccessException e1) {
-                e1.printStackTrace();
-            } catch (InvocationTargetException e1) {
-                e1.printStackTrace();
-            } catch (NoSuchMethodException e1) {
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e1) {
                 e1.printStackTrace();
             }
         }

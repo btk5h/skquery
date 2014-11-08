@@ -37,11 +37,7 @@ public class EffOptionDeveloperMode extends OptionsPragma {
                         Method unloadScript = ScriptLoader.class.getDeclaredMethod("unloadScript", File.class);
                         unloadScript.setAccessible(true);
                         unloadScript.invoke(null, executingScript);
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
                     ScriptLoader.loadScripts(Collect.asArray(executingScript));
