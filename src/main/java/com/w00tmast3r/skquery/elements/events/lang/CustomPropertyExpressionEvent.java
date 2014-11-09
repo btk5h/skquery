@@ -14,13 +14,15 @@ public class CustomPropertyExpressionEvent extends Event implements MethodEvent,
     private final Expression<?>[] args;
     private final Class<?> expectedOutput;
     private final ExprCustomPropertyExpression.Pattern pattern;
+    private final Event superEvent;
     private Object[] returnValue = null;
 
-    public CustomPropertyExpressionEvent(String match, Expression<?>[] args, Class<?> expectedOutput, ExprCustomPropertyExpression.Pattern pattern) {
+    public CustomPropertyExpressionEvent(String match, Expression<?>[] args, Class<?> expectedOutput, ExprCustomPropertyExpression.Pattern pattern, Event superEvent) {
         this.match = match;
         this.args = args;
         this.expectedOutput = expectedOutput;
         this.pattern = pattern;
+        this.superEvent = superEvent;
     }
 
     @Override
@@ -49,6 +51,11 @@ public class CustomPropertyExpressionEvent extends Event implements MethodEvent,
 
     public Object[] getReturn() {
         return returnValue;
+    }
+
+    @Override
+    public Event getSuperEvent() {
+        return superEvent;
     }
 
     @Override

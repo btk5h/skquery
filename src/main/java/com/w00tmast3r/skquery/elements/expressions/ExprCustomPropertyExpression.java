@@ -31,7 +31,7 @@ public class ExprCustomPropertyExpression extends SimpleExpression<Object> {
 
     @Override
     protected Object[] get(Event e) {
-        CustomPropertyExpressionEvent expr = new CustomPropertyExpressionEvent(execute, expressions, getReturnType(), matchedPattern.getSecond());
+        CustomPropertyExpressionEvent expr = new CustomPropertyExpressionEvent(execute, expressions, getReturnType(), matchedPattern.getSecond(), e);
         Bukkit.getPluginManager().callEvent(expr);
         return expr.getReturn();
     }

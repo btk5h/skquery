@@ -24,10 +24,10 @@ public class ExprOriginExpression extends SimpleExpression<Object> {
         Expression<?>[] args = ((CustomPropertyExpressionEvent) e).getArgs();
         switch (((CustomPropertyExpressionEvent) e).getPattern()) {
             case TRIM_LAST:
-                out[0] = args[args.length - 1].getSingle(e);
+                out[0] = args[args.length - 1].getSingle(((CustomPropertyExpressionEvent) e).getSuperEvent());
                 break;
             case TRIM_FIRST:
-                out[0] = args[0].getSingle(e);
+                out[0] = args[0].getSingle(((CustomPropertyExpressionEvent) e).getSuperEvent());
                 break;
         }
         return out;

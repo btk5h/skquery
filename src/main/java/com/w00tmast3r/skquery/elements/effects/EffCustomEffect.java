@@ -23,7 +23,7 @@ public class EffCustomEffect extends Effect {
 
     @Override
     protected void execute(Event e) {
-        Bukkit.getPluginManager().callEvent(new CustomEffectEvent(execute, expressions));
+        Bukkit.getPluginManager().callEvent(new CustomEffectEvent(execute, expressions, e));
     }
 
     @Override

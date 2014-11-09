@@ -12,12 +12,14 @@ public class CustomExpressionEvent extends Event implements MethodEvent, Returna
     private final String match;
     private final Expression<?>[] args;
     private final Class<?> expectedOutput;
+    private final Event superEvent;
     private Object[] returnValue = null;
 
-    public CustomExpressionEvent(String match, Expression<?>[] args, Class<?> expectedOutput) {
+    public CustomExpressionEvent(String match, Expression<?>[] args, Class<?> expectedOutput, Event superEvent) {
         this.match = match;
         this.args = args;
         this.expectedOutput = expectedOutput;
+        this.superEvent = superEvent;
     }
 
     @Override
@@ -43,6 +45,10 @@ public class CustomExpressionEvent extends Event implements MethodEvent, Returna
         return expectedOutput;
     }
 
+    @Override
+    public Event getSuperEvent() {
+        return superEvent;
+    }
 
     public Object[] getReturn() {
         return returnValue;

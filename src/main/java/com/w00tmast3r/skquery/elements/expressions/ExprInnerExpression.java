@@ -39,7 +39,7 @@ public class ExprInnerExpression extends SimpleExpression<Object> {
             }
         }
         if (value >= ((Pullable) e).getArgs().length) return null;
-        return ((Pullable) e).getArgs()[value].getAll(e);
+        return ((Pullable) e).getArgs()[value].getAll(((Pullable) e).getSuperEvent());
     }
 
     @Override

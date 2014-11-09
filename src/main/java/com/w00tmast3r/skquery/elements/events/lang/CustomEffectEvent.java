@@ -9,10 +9,12 @@ public class CustomEffectEvent extends Event implements MethodEvent, Pullable {
     private static final HandlerList handlers = new HandlerList();
     private final String match;
     private final Expression<?>[] args;
+    private final Event superEvent;
 
-    public CustomEffectEvent(String match, Expression<?>[] args) {
+    public CustomEffectEvent(String match, Expression<?>[] args, Event superEvent) {
         this.match = match;
         this.args = args;
+        this.superEvent = superEvent;
     }
 
     @Override
@@ -23,6 +25,11 @@ public class CustomEffectEvent extends Event implements MethodEvent, Pullable {
     @Override
     public Expression<?>[] getArgs() {
         return args;
+    }
+
+    @Override
+    public Event getSuperEvent() {
+        return superEvent;
     }
 
     @Override

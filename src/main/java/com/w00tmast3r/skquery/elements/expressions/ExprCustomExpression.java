@@ -30,7 +30,7 @@ public class ExprCustomExpression extends SimpleExpression<Object> {
 
     @Override
     protected Object[] get(Event e) {
-        CustomExpressionEvent expr = new CustomExpressionEvent(execute, expressions, getReturnType());
+        CustomExpressionEvent expr = new CustomExpressionEvent(execute, expressions, getReturnType(), e);
         Bukkit.getPluginManager().callEvent(expr);
         return expr.getReturn();
     }
