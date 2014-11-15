@@ -37,7 +37,7 @@ public class ExprCustomExpression extends SimpleExpression<Object> {
 
     @Override
     public boolean isSingle() {
-        return custom.get(matchedPattern).getSecond().getSecond();
+        return !custom.get(matchedPattern).getSecond().getSecond();
     }
 
     @Override
