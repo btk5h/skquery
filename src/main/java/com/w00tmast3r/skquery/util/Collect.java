@@ -74,10 +74,10 @@ public class Collect {
         }
     }
 
-    private static ArrayList<File> getListFiles(File root, FilenameFilter filter, ArrayList<File> toAdd) {
-        for (File f : root.listFiles(filter)) {
-            if (f.isDirectory()) return getListFiles(f, filter, toAdd);
-            else toAdd.add(f);
+    private static ArrayList<File> getListFiles(File root, final FilenameFilter filter, ArrayList<File> toAdd) {
+        for (File f : root.listFiles()) {
+            if (f.isDirectory()) toAdd.addAll(getListFiles(f, filter, toAdd));
+            else if (filter.accept(f, f.getName())) toAdd.add(f);
         }
         return toAdd;
     }
@@ -88,6 +88,11 @@ public class Collect {
     }
 
     public static File[] getFiles(File root) {
-        return getFiles(root, null);
+        return getFiles(root, new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return true;
+            }
+        });
     }
 }

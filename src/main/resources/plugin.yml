@@ -1,6 +1,6 @@
 name: SkQuery
 author: w00tmast3r
-version: 3.22.1
+version: 3.22.2
 depend: [Skript]
 soft-depend: [ProtocolLib]
 main: com.w00tmast3r.skquery.SkQuery

@@ -123,7 +123,6 @@ public class SkqFileRegister {
                 EffCustomEffect.addAll(definitions.getEffectList());
                 ExprCustomExpression.addAll(definitions.getExpressionList().entrySet());
                 ExprCustomPropertyExpression.addAll(definitions.getPropertyList().entrySet());
-                System.out.println(definitions.getStructureList());
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
