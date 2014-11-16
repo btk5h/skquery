@@ -57,6 +57,11 @@ public class ExprSQLQueryObjects extends SimpleExpression<Object> {
     }
 
     @Override
+    public boolean isLoopOf(String s) {
+        return s.equals("object");
+    }
+
+    @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
         if (ScriptCredentials.get(ScriptLoader.currentScript.getFile()).getConnection() == null) {
             Skript.error("Database features are disabled until the script has SQL credentials associated with it.", ErrorQuality.SEMANTIC_ERROR);

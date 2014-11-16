@@ -23,9 +23,7 @@ public class CondHasPotion extends Condition {
     public boolean check(Event event) {
         LivingEntity e = entity.getSingle(event);
         PotionEffectType t = eff.getSingle(event);
-        if(e == null || t == null) return false;
-        if(isNegated()) return !e.hasPotionEffect(t);
-        else return e.hasPotionEffect(t);
+        return !(e == null || t == null) && (isNegated() ? !e.hasPotionEffect(t) : e.hasPotionEffect(t));
     }
 
     @Override

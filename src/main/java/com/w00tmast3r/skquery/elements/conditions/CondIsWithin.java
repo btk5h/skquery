@@ -25,7 +25,7 @@ public class CondIsWithin extends Condition {
         Location p2 = pos2.getSingle(event);
         Location l = loc.getSingle(event);
         if(loc == null || p1 == null || p2 == null) return isNegated();
-        return isNegated() ? new CuboidRegion(p1, p2).checkHas(l.toVector()) : !new CuboidRegion(p1, p2).checkHas(l.toVector());
+        return isNegated() ? !new CuboidRegion(p1, p2).checkHas(l.toVector()) : new CuboidRegion(p1, p2).checkHas(l.toVector());
     }
 
     @Override
